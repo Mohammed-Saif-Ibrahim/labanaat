@@ -1,0 +1,28 @@
+import { Skeleton } from "@labanaat/ui/skeleton";
+
+export const metadata = {
+  title: "Skeleton",
+  description: "Loading placeholder. Marked aria-hidden — pair it with a visually hidden status message so screen reader users get an equivalent announcement.",
+};
+
+# Skeleton
+
+Loading placeholder. Marked `aria-hidden` — pair it with a visually hidden status message so screen reader users get an equivalent announcement.
+
+<LiveDemo code={`<div className="ui-flex ui-w-64 ui-items-center ui-gap-3">
+    <Skeleton className="ui-h-10 ui-w-10 ui-rounded-[var(--ui-radius-full)]" />
+    <div className="ui-flex ui-flex-1 ui-flex-col ui-gap-2">
+      <Skeleton className="ui-h-3 ui-w-3/4" />
+      <Skeleton className="ui-h-3 ui-w-1/2" />
+    </div>
+  </div>`} />
+
+## Installation
+
+```tsx
+import { Skeleton } from "@labanaat/ui/skeleton";
+```
+
+## Props
+
+Skeleton accepts all standard `div` attributes — size and shape are controlled entirely via `className`.

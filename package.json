@@ -1,0 +1,35 @@
+{
+  "name": "labanaat-monorepo",
+  "private": true,
+  "packageManager": "pnpm@9.7.0",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "test:a11y": "turbo run test:a11y",
+    "changeset": "changeset",
+    "release": "turbo run build --filter=@labanaat/ui && changeset publish",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.9",
+    "turbo": "^2.1.3",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.2",
+    "eslint": "^8.57.1",
+    "@typescript-eslint/parser": "^7.18.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-config-prettier": "^9.1.0"
+  },
+  "engines": { "node": ">=18.18.0" },
+  "lint-staged": {
+    "*.{ts,tsx}": ["eslint --fix", "prettier --write"],
+    "*.{md,mdx,json,css}": ["prettier --write"]
+  }
+}

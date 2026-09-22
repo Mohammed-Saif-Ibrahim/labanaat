@@ -1,0 +1,45 @@
+export const metadata = {
+  title: "Toast",
+  description: "A transient notification stack built on Radix's Toast primitive. Wrap your app once, then push notifications from anywhere with the imperative useToast() hook.",
+};
+
+# Toast
+
+A transient notification stack built on Radix's Toast primitive. Wrap your app once, then push notifications from anywhere with the imperative `useToast()` hook.
+
+<LiveDemo noInline code={`function ToastTrigger() {
+  const { toast } = useToast();
+  return (
+    <Button onClick={() => toast({ title: "Changes saved", description: "Your profile was updated.", variant: "success" })}>
+      Show toast
+    </Button>
+  );
+}
+function Demo() {
+  return (
+    <ToastProvider>
+      <ToastRegistry>
+        <ToastTrigger />
+      </ToastRegistry>
+      <ToastViewport />
+    </ToastProvider>
+  );
+}
+render(<Demo />);`} />
+
+Toasts pause auto-dismiss on hover/focus and support swipe-to-dismiss on touch devices, both handled by Radix.
+
+## Installation
+
+```tsx
+import { ToastProvider, ToastViewport, ToastRegistry, useToast } from "@labanaat/ui/toast";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "title", type: "ReactNode", description: "Toast title (in useToast().toast(options))" },
+  { name: "description", type: "ReactNode", description: "Toast body text" },
+  { name: "variant", type: '"default" | "success" | "danger"', default: '"default"', description: "Visual style" },
+  { name: "durationMs", type: "number", default: "5000", description: "Auto-dismiss duration" },
+]} />

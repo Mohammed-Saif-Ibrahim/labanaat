@@ -1,0 +1,29 @@
+import { Separator } from "@labanaat/ui/separator";
+
+export const metadata = {
+  title: "Separator",
+  description: "Visual/semantic divider built on Radix's Separator primitive. Decorative by default, so it's removed from the accessibility tree.",
+};
+
+# Separator
+
+Visual/semantic divider built on Radix's Separator primitive. Decorative by default, so it's removed from the accessibility tree.
+
+<LiveDemo code={`<div className="ui-w-64">
+    <p className="ui-text-[var(--ui-text-sm)]">Section one</p>
+    <Separator className="ui-my-4" />
+    <p className="ui-text-[var(--ui-text-sm)]">Section two</p>
+  </div>`} />
+
+## Installation
+
+```tsx
+import { Separator } from "@labanaat/ui/separator";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "Direction of the divider" },
+  { name: "decorative", type: "boolean", default: "true", description: "Removes it from the accessibility tree when purely visual" },
+]} />

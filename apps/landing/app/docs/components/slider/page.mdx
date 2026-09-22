@@ -1,0 +1,54 @@
+export const metadata = {
+  title: "Slider",
+  description: "Single or multi-thumb range slider built on Radix's Slider primitive.",
+};
+
+# Slider
+
+Single or multi-thumb range slider built on Radix's Slider primitive.
+
+<LiveDemo noInline code={`function Demo() {
+  const [value, setValue] = useState([50]);
+  return (
+    <Slider
+      label="Volume"
+      value={value}
+      onValueChange={setValue}
+      formatValue={(v) => \`\${v}%\`}
+    />
+  );
+}
+render(<Demo />);`} />
+
+## Range selection
+
+Pass a two-value array to get a min/max range with two thumbs.
+
+<LiveDemo noInline code={`function Demo() {
+  const [value, setValue] = useState([20, 80]);
+  return (
+    <Slider
+      label="Price range"
+      value={value}
+      onValueChange={setValue}
+      formatValue={(v) => \`$\${v}\`}
+    />
+  );
+}
+render(<Demo />);`} />
+
+## Installation
+
+```tsx
+import { Slider } from "@labanaat/ui/slider";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "value / defaultValue", type: "number[]", description: "Controlled / uncontrolled value(s); a two-value array enables range mode" },
+  { name: "onValueChange", type: "(value: number[]) => void", description: "Change handler" },
+  { name: "min / max", type: "number", default: "0 / 100", description: "Bounds" },
+  { name: "label", type: "string", description: "Field label" },
+  { name: "formatValue", type: "(value: number) => string", description: "Formats the value shown next to the label" },
+]} />

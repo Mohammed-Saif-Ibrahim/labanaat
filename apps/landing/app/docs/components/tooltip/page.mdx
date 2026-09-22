@@ -1,0 +1,28 @@
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@labanaat/ui/tooltip";
+import { Button } from "@labanaat/ui/button";
+
+export const metadata = {
+  title: "Tooltip",
+  description: "Brief hint text on hover/focus, built on Radix's Tooltip primitive. Wrap your app once in TooltipProvider.",
+};
+
+# Tooltip
+
+Brief hint text on hover/focus, built on Radix's Tooltip primitive. Wrap your app once in `TooltipProvider`.
+
+<LiveDemo code={`<TooltipProvider>
+    <Tooltip>
+      <TooltipTrigger asChild><Button variant="outline">Hover me</Button></TooltipTrigger>
+      <TooltipContent>Opens your billing portal in a new tab</TooltipContent>
+    </Tooltip>
+  </TooltipProvider>`} />
+
+## Installation
+
+```tsx
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@labanaat/ui/tooltip";
+```
+
+## Props
+
+`Tooltip` accepts Radix's `Tooltip.Root` props (`open`/`delayDuration`). `TooltipContent` additionally accepts `sideOffset` for positioning.

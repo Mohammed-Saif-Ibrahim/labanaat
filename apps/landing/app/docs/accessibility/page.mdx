@@ -1,0 +1,20 @@
+# Accessibility
+
+Every component is built with semantic HTML first, ARIA attributes only
+where semantics fall short, full keyboard operability, and correct focus
+behavior (trapping in modals, restoration on close, visible focus rings via
+a shared `--ui-focus-ring` token).
+
+Complex interaction patterns (Dialog, Select, Dropdown Menu, Tooltip, Tabs)
+use Radix Primitives internally for their proven, extensively tested
+accessibility behavior — the library wraps them behind its own styled,
+documented API.
+
+36 of the library's 47 components have a dedicated behavior test file
+(Testing Library), and 40 have a dedicated `axe-core` accessibility sweep
+via `vitest-axe` — these two sets overlap significantly, and every
+component has at least one of the two. The 11 without their own behavior
+test file (Alert, Avatar, Badge, Breadcrumbs, Checkbox, ProgressBar,
+RadioGroup, Select, Separator, Skeleton, Switch) are all covered by the
+axe sweep instead; adding dedicated interaction tests for these is the
+remaining next step.

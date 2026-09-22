@@ -1,0 +1,45 @@
+export const metadata = {
+  title: "Navbar",
+  description: "A top-level site or app header. Composition-based (Navbar.Brand/Content/Item/MenuToggle/Menu), with a shared open/closed context so the mobile hamburger and its dropdown panel stay in sync without…",
+};
+
+# Navbar
+
+A top-level site or app header. Composition-based (`Navbar.Brand/Content/Item/MenuToggle/Menu`), with a shared open/closed context so the mobile hamburger and its dropdown panel stay in sync without prop drilling.
+
+<LiveDemo code={`<Navbar position="static">
+  <NavbarBrand>
+    <span className="ui-flex ui-h-7 ui-w-7 ui-items-center ui-justify-center ui-rounded-[var(--ui-radius-md)] ui-bg-[var(--ui-primary)] ui-font-mono ui-text-[13px] ui-font-semibold ui-text-white">L</span>
+    <span className="ui-font-semibold ui-text-[var(--ui-fg)]">Labanaat</span>
+  </NavbarBrand>
+  <NavbarContent>
+    <NavbarItem href="#" active>Docs</NavbarItem>
+    <NavbarItem href="#">Components</NavbarItem>
+    <NavbarItem href="#">GitHub</NavbarItem>
+  </NavbarContent>
+  <NavbarMenuToggle />
+  <NavbarMenu>
+    <NavbarItem href="#" active>Docs</NavbarItem>
+    <NavbarItem href="#">Components</NavbarItem>
+    <NavbarItem href="#">GitHub</NavbarItem>
+  </NavbarMenu>
+</Navbar>`} minHeight={200} />
+
+Narrow your browser to see the hamburger toggle appear — `NavbarContent` hides below the `sm` breakpoint in favor of `NavbarMenu`.
+
+## Installation
+
+```tsx
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu } from "@labanaat/ui/navbar";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "position", type: '"static" | "sticky" | "fixed"', default: '"sticky"', description: "Positioning of the header bar (on Navbar)" },
+  { name: "menuOpen / defaultMenuOpen", type: "boolean", description: "Controlled / uncontrolled mobile menu state (on Navbar)" },
+  { name: "onMenuOpenChange", type: "(open) => void", description: "Change handler (on Navbar)" },
+  { name: "active", type: "boolean", description: "Marks a NavbarItem as the current page" },
+]} />
+
+`useNavbar()` exposes `{ menuOpen, setMenuOpen }` for building custom toggle controls.

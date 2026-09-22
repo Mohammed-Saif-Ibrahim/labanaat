@@ -1,0 +1,30 @@
+import { Popover, PopoverTrigger, PopoverContent } from "@labanaat/ui/popover";
+import { Button } from "@labanaat/ui/button";
+
+export const metadata = {
+  title: "Popover",
+  description: "Generic floating panel for rich content — as opposed to Tooltip's brief text hints or DropdownMenu's list-of-actions semantics. Built on Radix's Popover primitive.",
+};
+
+# Popover
+
+Generic floating panel for rich content — as opposed to `Tooltip`'s brief text hints or `DropdownMenu`'s list-of-actions semantics. Built on Radix's Popover primitive.
+
+<LiveDemo code={`<Popover>
+    <PopoverTrigger asChild><Button variant="outline">What's included?</Button></PopoverTrigger>
+    <PopoverContent>
+      <p className="ui-text-[var(--ui-text-sm)] ui-text-[var(--ui-fg)]">
+        The Pro plan includes unlimited projects, SSO, and priority support for up to 50 seats.
+      </p>
+    </PopoverContent>
+  </Popover>`} minHeight={260} />
+
+## Installation
+
+```tsx
+import { Popover, PopoverTrigger, PopoverContent } from "@labanaat/ui/popover";
+```
+
+## Props
+
+`Popover` accepts Radix's `Popover.Root` props. `PopoverContent` additionally accepts `align` and `sideOffset` for positioning.

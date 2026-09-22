@@ -1,0 +1,35 @@
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from "@labanaat/ui/dialog";
+import { Button } from "@labanaat/ui/button";
+
+export const metadata = {
+  title: "Dialog",
+  description: "Modal overlay built on Radix's Dialog primitive — focus trapping, scroll locking, and escape/outside-click handling come for free.",
+};
+
+# Dialog
+
+Modal overlay built on Radix's Dialog primitive — focus trapping, scroll locking, and escape/outside-click handling come for free.
+
+<LiveDemo code={`<Dialog>
+    <DialogTrigger asChild><Button>Delete account</Button></DialogTrigger>
+    <DialogContent>
+      <DialogHeader>
+        <DialogTitle>Are you sure?</DialogTitle>
+        <DialogDescription>This action cannot be undone. This will permanently delete your account.</DialogDescription>
+      </DialogHeader>
+      <DialogFooter>
+        <DialogClose asChild><Button variant="ghost">Cancel</Button></DialogClose>
+        <Button variant="danger">Delete</Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>`} />
+
+## Installation
+
+```tsx
+import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from "@labanaat/ui/dialog";
+```
+
+## Props
+
+`Dialog` accepts Radix's `Dialog.Root` props (`open`/`defaultOpen`/`onOpenChange`). `DialogContent` additionally accepts `hideCloseButton` to omit the built-in close button. The rest follow Radix's Dialog API directly.

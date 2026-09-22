@@ -1,0 +1,61 @@
+export const metadata = {
+  title: "Chart",
+  description: "Line, bar, and area charts for dashboards, built on recharts. Colors are driven by the current design tokens by default — including the accent color picker in the header — so a chart repaints along…",
+};
+
+# Chart
+
+Line, bar, and area charts for dashboards, built on `recharts`. Colors are driven by the current design tokens by default — including the accent color picker in the header — so a chart repaints along with every other component when the theme changes.
+
+<LiveDemo code={`<LineChart
+  data={[
+    { month: "Jan", revenue: 4200, users: 240 },
+    { month: "Feb", revenue: 3800, users: 139 },
+    { month: "Mar", revenue: 5200, users: 380 },
+    { month: "Apr", revenue: 4900, users: 420 },
+    { month: "May", revenue: 6100, users: 510 },
+  ]}
+  xKey="month"
+  series={[{ key: "revenue", label: "Revenue" }, { key: "users", label: "New users" }]}
+/>`} minHeight={400} />
+
+## Bar and area variants
+
+<LiveDemo code={`<BarChart
+  data={[
+    { month: "Jan", revenue: 4200 },
+    { month: "Feb", revenue: 3800 },
+    { month: "Mar", revenue: 5200 },
+  ]}
+  xKey="month"
+  series={[{ key: "revenue" }]}
+/>`} minHeight={360} />
+
+<LiveDemo code={`<AreaChart
+  data={[
+    { month: "Jan", revenue: 4200 },
+    { month: "Feb", revenue: 3800 },
+    { month: "Mar", revenue: 5200 },
+  ]}
+  xKey="month"
+  series={[{ key: "revenue" }]}
+/>`} minHeight={360} />
+
+## Installation
+
+```tsx
+import { LineChart, BarChart, AreaChart } from "@labanaat/ui/chart";
+```
+
+## Props
+
+All three share the same props:
+
+<PropsTable rows={[
+  { name: "data", type: "Record<string, string | number>[]", description: "Row data" },
+  { name: "xKey", type: "string", description: "Key used for the x-axis / category labels" },
+  { name: "series", type: "{ key, label?, color? }[]", description: "One entry per line/bar/area; color defaults to the token palette, cycling if needed" },
+  { name: "height", type: "number", default: "320", description: "Chart height in pixels" },
+  { name: "showGrid", type: "boolean", default: "true", description: "Shows the background grid lines" },
+  { name: "showLegend", type: "boolean", default: "series.length > 1", description: "Shows the legend" },
+]} />

@@ -1,0 +1,55 @@
+export const metadata = {
+  title: "Metric",
+  description: "A single KPI/stat display, typically inside a Card on a dashboard. Pure composition, like Card itself.",
+};
+
+# Metric
+
+A single KPI/stat display, typically inside a `Card` on a dashboard. Pure composition, like `Card` itself.
+
+<LiveDemo code={`<Metric>
+  <MetricLabel>Monthly recurring revenue</MetricLabel>
+  <MetricValue>$4,820</MetricValue>
+  <MetricDelta direction="up">+12% vs last month</MetricDelta>
+</Metric>`} />
+
+## Neutral and negative trends
+
+`direction` isn't hardcoded to "up = green" — pair it with what's actually good for your specific metric (a rise in churn is bad, a rise in revenue is good).
+
+<LiveDemo code={`<div className="ui-flex ui-flex-wrap ui-gap-8">
+  <Metric>
+    <MetricLabel>Active users</MetricLabel>
+    <MetricValue>1,204</MetricValue>
+    <MetricDelta direction="neutral">No change</MetricDelta>
+  </Metric>
+  <Metric>
+    <MetricLabel>Churn rate</MetricLabel>
+    <MetricValue>2.4%</MetricValue>
+    <MetricDelta direction="down">-0.3pts vs last month</MetricDelta>
+  </Metric>
+</div>`} />
+
+## Inside a Card
+
+<LiveDemo code={`<Card className="ui-w-64">
+  <CardContent className="ui-pt-6">
+    <Metric>
+      <MetricLabel>Seats used</MetricLabel>
+      <MetricValue>7 / 10</MetricValue>
+      <MetricDescription>3 seats remaining</MetricDescription>
+    </Metric>
+  </CardContent>
+</Card>`} />
+
+## Installation
+
+```tsx
+import { Metric, MetricLabel, MetricValue, MetricDelta, MetricDescription } from "@labanaat/ui/metric";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "direction", type: '"up" | "down" | "neutral"', description: "Drives both the icon and color of MetricDelta" },
+]} />

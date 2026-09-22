@@ -1,0 +1,50 @@
+export const metadata = {
+  title: "Stepper",
+  description: "Onboarding, checkout, and multi-step form progress. The parent app owns currentStep — there's no internal uncontrolled mode, since a stepper always reflects state that lives in your wizard logic.",
+};
+
+# Stepper
+
+Onboarding, checkout, and multi-step form progress. The parent app owns `currentStep` — there's no internal uncontrolled mode, since a stepper always reflects state that lives in your wizard logic.
+
+<LiveDemo code={`<Stepper currentStep={1}>
+  <StepperItem index={0} title="Account" description="Basic info" />
+  <StepperItem index={1} title="Billing" description="Payment details" />
+  <StepperItem index={2} title="Confirm" description="Review and submit" isLast />
+</Stepper>`} />
+
+## Vertical orientation
+
+<LiveDemo code={`<Stepper currentStep={1} orientation="vertical">
+  <StepperItem index={0} title="Account" description="Basic info" />
+  <StepperItem index={1} title="Billing" description="Payment details" />
+  <StepperItem index={2} title="Confirm" description="Review and submit" isLast />
+</Stepper>`} minHeight={280} />
+
+## Error state
+
+An explicit `status` prop overrides the auto-derived one — useful for marking a step invalid without changing `currentStep`.
+
+<LiveDemo code={`<Stepper currentStep={2}>
+  <StepperItem index={0} title="Account" status="complete" />
+  <StepperItem index={1} title="Billing" status="error" description="Card declined" />
+  <StepperItem index={2} title="Confirm" isLast />
+</Stepper>`} />
+
+## Installation
+
+```tsx
+import { Stepper, StepperItem } from "@labanaat/ui/stepper";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "currentStep", type: "number", description: "0-indexed current step (on Stepper)" },
+  { name: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "Layout direction (on Stepper)" },
+  { name: "index", type: "number", description: "This step's 0-indexed position (on StepperItem)" },
+  { name: "title", type: "ReactNode", description: "Step label (on StepperItem)" },
+  { name: "description", type: "ReactNode", description: "Supporting text (on StepperItem)" },
+  { name: "status", type: '"complete" | "current" | "upcoming" | "error"', description: "Overrides the status auto-derived from currentStep (on StepperItem)" },
+  { name: "isLast", type: "boolean", default: "false", description: "Hides the connecting line after this step (on StepperItem)" },
+]} />

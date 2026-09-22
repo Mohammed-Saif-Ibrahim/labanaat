@@ -1,0 +1,47 @@
+export const metadata = {
+  title: "Timeline",
+  description: "Activity feeds, changelogs, order history. Pure composition — compose Timeline.Item > (Timeline.Indicator + Timeline.Content) the same way you'd compose Card.",
+};
+
+# Timeline
+
+Activity feeds, changelogs, order history. Pure composition — compose `Timeline.Item` > (`Timeline.Indicator` + `Timeline.Content`) the same way you'd compose `Card`.
+
+<LiveDemo code={`<Timeline>
+  <TimelineItem>
+    <TimelineIndicator variant="success" />
+    <TimelineContent>
+      <TimelineTitle>Deploy completed</TimelineTitle>
+      <TimelineDescription>Production deploy finished successfully.</TimelineDescription>
+      <TimelineTime>2 hours ago</TimelineTime>
+    </TimelineContent>
+  </TimelineItem>
+  <TimelineItem>
+    <TimelineIndicator variant="primary" />
+    <TimelineContent>
+      <TimelineTitle>Build started</TimelineTitle>
+      <TimelineTime>3 hours ago</TimelineTime>
+    </TimelineContent>
+  </TimelineItem>
+  <TimelineItem isLast>
+    <TimelineIndicator />
+    <TimelineContent>
+      <TimelineTitle>Project created</TimelineTitle>
+      <TimelineTime>1 day ago</TimelineTime>
+    </TimelineContent>
+  </TimelineItem>
+</Timeline>`} minHeight={320} />
+
+## Installation
+
+```tsx
+import { Timeline, TimelineItem, TimelineIndicator, TimelineContent, TimelineTitle, TimelineDescription, TimelineTime } from "@labanaat/ui/timeline";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "isLast", type: "boolean", default: "false", description: "Hides the connector line after this item (on TimelineItem)" },
+  { name: "variant", type: '"default" | "primary" | "success" | "danger"', default: '"default"', description: "Indicator color (on TimelineIndicator)" },
+  { name: "icon", type: "ReactNode", description: "Icon shown inside the indicator dot (on TimelineIndicator)" },
+]} />

@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  overscroll-behavior-y: none;
+}
+
+body {
+  font-family: var(--font-sans), var(--ui-font-sans);
+  background: var(--ui-bg);
+  color: var(--ui-fg);
+  overscroll-behavior-y: none;
+}
+
+code, pre, .font-mono {
+  font-family: var(--font-mono), var(--ui-font-mono);
+}
+
+/* Shiki (via rehype-pretty-code) sets --shiki-light/--shiki-dark per token
+   instead of a `color` property directly, so the actual color has to be
+   picked up here — and re-picked-up under [data-theme="dark"], which is
+   the same attribute the library's own applyTheme() toggles on <html>. */
+.ui-mdx-pre code span {
+  color: var(--shiki-light);
+}
+[data-theme="dark"] .ui-mdx-pre code span {
+  color: var(--shiki-dark);
+}
+
+/* Subtle dot-grid background for component preview panels in the docs —
+   a common, recognizable "this is a demo surface" visual cue (used by
+   most component-library docs sites) built with a plain CSS gradient,
+   no image asset. */
+.ui-demo-grid {
+  background-image: radial-gradient(var(--ui-border) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+[data-theme="dark"] .ui-demo-grid {
+  background-image: radial-gradient(var(--ui-color-neutral-800) 1px, transparent 1px);
+}
+
+/* Hero backdrop: a faint large-scale grid line pattern, distinct from the
+   docs preview dot-grid, used once behind the homepage hero only. */
+/* Hero background is now handled directly in the hero markup via
+   accent-tinted decorative blobs positioned behind content (never over
+   text) — the previous grid+radial-mask approach read as "blur" over the
+   headline and has been removed. */

@@ -1,0 +1,28 @@
+import { Checkbox } from "@labanaat/ui/checkbox";
+
+export const metadata = {
+  title: "Checkbox",
+  description: "Built on Radix's Checkbox primitive for correct checked/unchecked/indeterminate semantics.",
+};
+
+# Checkbox
+
+Built on Radix's Checkbox primitive for correct checked/unchecked/indeterminate semantics.
+
+<LiveDemo code={`<Checkbox label="Accept terms and conditions" description="Required to continue" />`} />
+
+## Installation
+
+```tsx
+import { Checkbox } from "@labanaat/ui/checkbox";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "label", type: "ReactNode", description: "Field label" },
+  { name: "description", type: "string", description: "Helper text shown below the label" },
+  { name: "checked / defaultChecked", type: "boolean | \"indeterminate\"", description: "Controlled / uncontrolled checked state" },
+  { name: "onCheckedChange", type: "(checked) => void", description: "Change handler" },
+  { name: "disabled", type: "boolean", default: "false", description: "Disables interaction" },
+]} />

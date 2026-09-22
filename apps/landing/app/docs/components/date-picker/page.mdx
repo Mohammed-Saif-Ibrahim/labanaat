@@ -1,0 +1,27 @@
+import { DatePicker } from "@labanaat/ui/date-picker";
+
+export const metadata = {
+  title: "DatePicker",
+  description: "Built on the native <input type=\"date\"> rather than a custom calendar grid — a deliberate trade-off. The native control gets correct keyboard input, locale-aware formatting, and mobile date wheels for",
+};
+
+# DatePicker
+
+Built on the native `<input type="date">` rather than a custom calendar grid — a deliberate trade-off. The native control gets correct keyboard input, locale-aware formatting, and mobile date wheels for free, at the cost of custom visual styling. A fully custom `DateRangePicker` is planned as a follow-up — see the [roadmap](/docs/introduction).
+
+<LiveDemo code={`<DatePicker label="Start date" className="ui-w-56" />`} />
+
+## Installation
+
+```tsx
+import { DatePicker } from "@labanaat/ui/date-picker";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "label", type: "string", description: "Field label" },
+  { name: "description", type: "string", description: "Helper text" },
+  { name: "error", type: "string", description: "Error message; sets aria-invalid" },
+  { name: "min / max", type: "string", description: "ISO 8601 date bounds, e.g. \"2025-01-01\"" },
+]} />

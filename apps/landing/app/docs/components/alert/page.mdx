@@ -1,0 +1,34 @@
+import { Alert } from "@labanaat/ui/alert";
+
+export const metadata = {
+  title: "Alert",
+  description: "Inline status message. Uses role=\"alert\" for danger/warning variants so assistive tech announces it immediately; role=\"status\" otherwise.",
+};
+
+# Alert
+
+Inline status message. Uses `role="alert"` for danger/warning variants so assistive tech announces it immediately; `role="status"` otherwise.
+
+<LiveDemo code={`<Alert variant="warning" title="Payment method expiring">Update your card before the end of the month.</Alert>`} />
+
+## Variants
+
+<LiveDemo code={`<div className="ui-flex ui-w-full ui-flex-col ui-gap-3">
+    <Alert variant="neutral" title="Heads up">A neutral, informational message.</Alert>
+    <Alert variant="success" title="Saved">Your changes were saved successfully.</Alert>
+    <Alert variant="danger" title="Something went wrong">The request could not be completed.</Alert>
+  </div>`} minHeight={260} />
+
+## Installation
+
+```tsx
+import { Alert } from "@labanaat/ui/alert";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "variant", type: '"neutral" | "success" | "warning" | "danger"', default: '"neutral"', description: "Visual style; also determines alert vs. status role" },
+  { name: "title", type: "ReactNode", description: "Optional bold title line" },
+  { name: "icon", type: "ReactNode", description: "Decorative icon slot" },
+]} />

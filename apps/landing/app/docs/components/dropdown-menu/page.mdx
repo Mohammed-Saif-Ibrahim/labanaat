@@ -1,0 +1,31 @@
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "@labanaat/ui/dropdown-menu";
+import { Button } from "@labanaat/ui/button";
+
+export const metadata = {
+  title: "DropdownMenu",
+  description: "Action list with full keyboard support (typeahead, arrow-key navigation, escape-to-close), built on Radix's Dropdown Menu primitive.",
+};
+
+# DropdownMenu
+
+Action list with full keyboard support (typeahead, arrow-key navigation, escape-to-close), built on Radix's Dropdown Menu primitive.
+
+<LiveDemo code={`<DropdownMenu>
+    <DropdownMenuTrigger asChild><Button variant="outline">Actions ▾</Button></DropdownMenuTrigger>
+    <DropdownMenuContent>
+      <DropdownMenuItem>Edit member</DropdownMenuItem>
+      <DropdownMenuItem>Copy invite link</DropdownMenuItem>
+      <DropdownMenuSeparator />
+      <DropdownMenuItem destructive>Remove from workspace</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>`} minHeight={260} />
+
+## Installation
+
+```tsx
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator } from "@labanaat/ui/dropdown-menu";
+```
+
+## Props
+
+`DropdownMenuItem` accepts a `destructive` boolean for danger-styled actions, plus Radix's `DropdownMenu.Item` props (`onSelect`, `disabled`). The rest follow Radix's Dropdown Menu API directly.

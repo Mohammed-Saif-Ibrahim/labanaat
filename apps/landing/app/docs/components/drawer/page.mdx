@@ -1,0 +1,40 @@
+import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerDescription, DrawerFooter, DrawerClose } from "@labanaat/ui/drawer";
+import { Button } from "@labanaat/ui/button";
+
+export const metadata = {
+  title: "Drawer",
+  description: "A side panel (a.k.a. \"Sheet\") built on the same Radix Dialog primitive as Dialog, reusing its focus trap and dismiss behavior, with slide-in positioning via the side prop.",
+};
+
+# Drawer
+
+A side panel (a.k.a. "Sheet") built on the same Radix Dialog primitive as `Dialog`, reusing its focus trap and dismiss behavior, with slide-in positioning via the `side` prop.
+
+<LiveDemo code={`<Drawer>
+    <DrawerTrigger asChild><Button>Edit member</Button></DrawerTrigger>
+    <DrawerContent side="right">
+      <DrawerHeader>
+        <DrawerTitle>Edit member</DrawerTitle>
+        <DrawerDescription>Update this member's role and access.</DrawerDescription>
+      </DrawerHeader>
+      <DrawerFooter>
+        <DrawerClose asChild><Button variant="ghost">Cancel</Button></DrawerClose>
+        <Button>Save</Button>
+      </DrawerFooter>
+    </DrawerContent>
+  </Drawer>`} />
+
+## Installation
+
+```tsx
+import { Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle, DrawerFooter, DrawerClose } from "@labanaat/ui/drawer";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "side", type: '"left" | "right" | "bottom"', default: '"right"', description: "Which edge the panel slides in from (on DrawerContent)" },
+  { name: "hideCloseButton", type: "boolean", default: "false", description: "Omits the built-in close button (on DrawerContent)" },
+]} />
+
+The rest of `Drawer`'s subcomponents follow Radix's Dialog API directly (it shares the same primitive as `Dialog`).

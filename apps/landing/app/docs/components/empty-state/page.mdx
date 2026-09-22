@@ -1,0 +1,32 @@
+import { EmptyState } from "@labanaat/ui/empty-state";
+import { Button } from "@labanaat/ui/button";
+
+export const metadata = {
+  title: "EmptyState",
+  description: "Placeholder for empty lists/collections. Composable action slot accepts any Button or link.",
+};
+
+# EmptyState
+
+Placeholder for empty lists/collections. Composable action slot accepts any `Button` or link.
+
+<LiveDemo code={`<EmptyState
+    title="No members yet"
+    description="Invite your first teammate to get started."
+    action={<Button size="sm">Invite member</Button>}
+  />`} />
+
+## Installation
+
+```tsx
+import { EmptyState } from "@labanaat/ui/empty-state";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "title", type: "ReactNode", description: "Defaults to a localized string if omitted" },
+  { name: "description", type: "ReactNode", description: "Supporting text" },
+  { name: "icon", type: "ReactNode", description: "Decorative icon slot" },
+  { name: "action", type: "ReactNode", description: "Typically a Button" },
+]} />

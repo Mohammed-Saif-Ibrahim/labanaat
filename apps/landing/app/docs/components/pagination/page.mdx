@@ -1,0 +1,29 @@
+export const metadata = {
+  title: "Pagination",
+  description: "Page navigation with a nav landmark and aria-current=\"page\" on the active page. Fully controlled.",
+};
+
+# Pagination
+
+Page navigation with a `nav` landmark and `aria-current="page"` on the active page. Fully controlled.
+
+<LiveDemo noInline code={`function Demo() {
+  const [page, setPage] = useState(1);
+  return <Pagination page={page} totalPages={8} onPageChange={setPage} />;
+}
+render(<Demo />);`} />
+
+## Installation
+
+```tsx
+import { Pagination } from "@labanaat/ui/pagination";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "page", type: "number", description: "Current page (controlled)" },
+  { name: "totalPages", type: "number", description: "Total number of pages" },
+  { name: "onPageChange", type: "(page: number) => void", description: "Called when a page is selected" },
+  { name: "siblingCount", type: "number", default: "1", description: "Sibling pages shown on each side of the current page" },
+]} />

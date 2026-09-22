@@ -1,0 +1,66 @@
+export const metadata = {
+  title: "Carousel",
+  description: "Product showcases, testimonials, media galleries. Built on embla-carousel-react for the drag/touch/loop mechanics — genuinely hard to get right and accessible from scratch — rendered through…",
+};
+
+# Carousel
+
+Product showcases, testimonials, media galleries. Built on `embla-carousel-react` for the drag/touch/loop mechanics — genuinely hard to get right and accessible from scratch — rendered through Labanaat's own composition API. Embla never appears in the public import surface; `useCarousel()` is a Labanaat hook for building custom controls beyond Previous/Next/Dots.
+
+<LiveDemo code={`<Carousel className="ui-w-full ui-max-w-sm">
+  <CarouselContent>
+    <CarouselItem>
+      <div className="ui-flex ui-h-40 ui-items-center ui-justify-center ui-rounded-[var(--ui-radius-lg)] ui-border ui-border-[var(--ui-border)] ui-bg-[var(--ui-bg-subtle)] ui-text-[var(--ui-fg-muted)]">Slide 1</div>
+    </CarouselItem>
+    <CarouselItem>
+      <div className="ui-flex ui-h-40 ui-items-center ui-justify-center ui-rounded-[var(--ui-radius-lg)] ui-border ui-border-[var(--ui-border)] ui-bg-[var(--ui-bg-subtle)] ui-text-[var(--ui-fg-muted)]">Slide 2</div>
+    </CarouselItem>
+    <CarouselItem>
+      <div className="ui-flex ui-h-40 ui-items-center ui-justify-center ui-rounded-[var(--ui-radius-lg)] ui-border ui-border-[var(--ui-border)] ui-bg-[var(--ui-bg-subtle)] ui-text-[var(--ui-fg-muted)]">Slide 3</div>
+    </CarouselItem>
+  </CarouselContent>
+  <div className="ui-mt-4 ui-flex ui-items-center ui-justify-between">
+    <CarouselPrevious />
+    <CarouselDots />
+    <CarouselNext />
+  </div>
+</Carousel>`} minHeight={280} />
+
+Drag/swipe the slide directly, use the arrow buttons, the dots, or focus the carousel and press the Left/Right arrow keys.
+
+## Looping
+
+<LiveDemo code={`<Carousel loop className="ui-w-full ui-max-w-sm">
+  <CarouselContent>
+    <CarouselItem>
+      <div className="ui-flex ui-h-32 ui-items-center ui-justify-center ui-rounded-[var(--ui-radius-lg)] ui-border ui-border-[var(--ui-border)] ui-bg-[var(--ui-bg-subtle)]">A</div>
+    </CarouselItem>
+    <CarouselItem>
+      <div className="ui-flex ui-h-32 ui-items-center ui-justify-center ui-rounded-[var(--ui-radius-lg)] ui-border ui-border-[var(--ui-border)] ui-bg-[var(--ui-bg-subtle)]">B</div>
+    </CarouselItem>
+  </CarouselContent>
+  <div className="ui-mt-4 ui-flex ui-justify-center ui-gap-2">
+    <CarouselPrevious />
+    <CarouselNext />
+  </div>
+</Carousel>`} minHeight={220} />
+
+## Installation
+
+```tsx
+import {
+  Carousel, CarouselContent, CarouselItem,
+  CarouselPrevious, CarouselNext, CarouselDots,
+} from "@labanaat/ui/carousel";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "Scroll axis" },
+  { name: "loop", type: "boolean", default: "false", description: "Wraps around at the start/end" },
+  { name: "startIndex", type: "number", default: "0", description: "Initial slide" },
+  { name: "onSlideChange", type: "(index) => void", description: "Called whenever the selected slide changes" },
+]} />
+
+`useCarousel()` exposes `{ canScrollPrev, canScrollNext, scrollPrev, scrollNext, selectedIndex, scrollSnaps, scrollTo }` for building custom controls.

@@ -1,0 +1,36 @@
+import { Input } from "@labanaat/ui/input";
+
+export const metadata = {
+  title: "Input",
+  description: "Text input with label, description, and error wired via aria-describedby/aria-invalid automatically — no manual id plumbing.",
+};
+
+# Input
+
+Text input with label, description, and error wired via `aria-describedby`/`aria-invalid` automatically — no manual id plumbing.
+
+<LiveDemo code={`<Input label="Email" placeholder="you@example.com" className="ui-w-64" />`} />
+
+## With description and error
+
+<LiveDemo code={`<div className="ui-flex ui-w-64 ui-flex-col ui-gap-4">
+    <Input label="Username" description="This will be publicly visible." />
+    <Input label="Password" type="password" error="Must be at least 8 characters." />
+  </div>`} minHeight={260} />
+
+## Installation
+
+```tsx
+import { Input } from "@labanaat/ui/input";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "label", type: "string", description: "Field label" },
+  { name: "hideLabel", type: "boolean", default: "false", description: "Visually hides the label while keeping it accessible" },
+  { name: "description", type: "string", description: "Helper text shown below the field" },
+  { name: "error", type: "string", description: "Error message; sets aria-invalid and swaps the border color" },
+  { name: "startSlot / endSlot", type: "ReactNode", description: "Icon or content slots inside the field" },
+  { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Size scale" },
+]} />

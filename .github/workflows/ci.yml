@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build-lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: "pnpm" }
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - name: Typecheck every workspace package
+        run: pnpm -r exec tsc --noEmit
+      - run: pnpm build
+      - run: pnpm test -- --coverage
+      - run: pnpm test:a11y
+
+  # Verifies the package actually works once published — not just inside
+  # this monorepo, where pnpm's workspace linking can mask real packaging
+  # bugs (wrong `exports` map, missing `require` conditions, files left
+  # out of the tarball). Installs the real `npm pack` output into a fresh
+  # project with no relationship to the workspace, then renders a real
+  # component through it via both CommonJS and ESM to prove resolution
+  # actually works both ways, not just that files exist on disk.
+  verify-package:
+    runs-on: ubuntu-latest
+    needs: build-lint-test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: "pnpm" }
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @labanaat/ui build
+      - name: Pack the real tarball
+        working-directory: packages/ui
+        run: npm pack
+      - name: Install into a throwaway project outside the workspace
+        run: |
+          mkdir -p /tmp/pack-test
+          cd /tmp/pack-test
+          npm init -y
+          npm install "$GITHUB_WORKSPACE"/packages/ui/labanaat-ui-*.tgz react@19 react-dom@19
+      - name: Render a real component via CommonJS require()
+        run: |
+          cat > /tmp/pack-test/test-cjs.cjs << 'EOF'
+          const React = require("react");
+          const ReactDOMServer = require("react-dom/server");
+          const { Button } = require("@labanaat/ui/button");
+          const html = ReactDOMServer.renderToStaticMarkup(React.createElement(Button, {}, "CJS works"));
+          if (!html.includes("CJS works")) throw new Error("CJS render did not produce expected output: " + html);
+          console.log("CJS require() resolution verified:", html);
+          EOF
+          node /tmp/pack-test/test-cjs.cjs
+      - name: Render a real component via ESM import
+        run: |
+          cat > /tmp/pack-test/test-esm.mjs << 'EOF'
+          import React from "react";
+          import ReactDOMServer from "react-dom/server";
+          import { Button } from "@labanaat/ui/button";
+          const html = ReactDOMServer.renderToStaticMarkup(React.createElement(Button, {}, "ESM works"));
+          if (!html.includes("ESM works")) throw new Error("ESM render did not produce expected output: " + html);
+          console.log("ESM import resolution verified:", html);
+          EOF
+          node /tmp/pack-test/test-esm.mjs
+      - name: Confirm the CSS export and TypeScript types resolve
+        run: |
+          test -f /tmp/pack-test/node_modules/@labanaat/ui/dist/styles.css
+          cat > /tmp/pack-test/test-types.ts << 'EOF'
+          import { Button, type ButtonProps } from "@labanaat/ui/button";
+          import "@labanaat/ui/styles.css";
+          const props: ButtonProps = { variant: "primary", size: "lg" };
+          console.log(typeof Button, props);
+          EOF
+          cd /tmp/pack-test && npm install --no-save typescript@5
+          npx tsc --noEmit --jsx react-jsx --module esnext --moduleResolution bundler --esModuleInterop --skipLibCheck test-types.ts

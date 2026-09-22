@@ -1,0 +1,35 @@
+export const metadata = {
+  title: "ActivityFeed",
+  description: "A chronological log of actor-driven events (audit logs, \"who did what\" feeds) — distinct from Timeline: avatar-centric rather than status-dot-centric, matching how activity feeds actually read (\"Ada i",
+};
+
+# ActivityFeed
+
+A chronological log of actor-driven events (audit logs, "who did what" feeds) — distinct from `Timeline`: avatar-centric rather than status-dot-centric, matching how activity feeds actually read ("Ada invited Grace") versus a Timeline's state progression ("Deploy completed"). Pure composition, like `Timeline` and `Card`.
+
+<LiveDemo code={`<ActivityFeed>
+  <ActivityItem>
+    <ActivityAvatar><Avatar name="Ada Lovelace" size="sm" /></ActivityAvatar>
+    <ActivityContent>
+      <ActivityText><strong>Ada Lovelace</strong> invited <strong>Grace Hopper</strong> to the workspace</ActivityText>
+      <ActivityTime>2 hours ago</ActivityTime>
+    </ActivityContent>
+  </ActivityItem>
+  <ActivityItem>
+    <ActivityAvatar><Avatar name="Alan Turing" size="sm" /></ActivityAvatar>
+    <ActivityContent>
+      <ActivityText><strong>Alan Turing</strong> created project <strong>Enigma</strong></ActivityText>
+      <ActivityTime>5 hours ago</ActivityTime>
+    </ActivityContent>
+  </ActivityItem>
+</ActivityFeed>`} minHeight={220} />
+
+## Installation
+
+```tsx
+import { ActivityFeed, ActivityItem, ActivityAvatar, ActivityContent, ActivityText, ActivityTime } from "@labanaat/ui/activity-feed";
+```
+
+## Props
+
+`ActivityFeed` renders with `role="feed"` and each `ActivityItem` with `role="article"`, matching how screen readers expect a live-updating content stream to be structured. All subcomponents accept standard HTML attributes — there is no bespoke prop API.

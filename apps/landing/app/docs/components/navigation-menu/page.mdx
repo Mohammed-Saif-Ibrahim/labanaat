@@ -1,0 +1,39 @@
+export const metadata = {
+  title: "NavigationMenu",
+  description: "Complex site navigation with flyout content, built on Radix's Navigation Menu primitive for correct hover/focus/keyboard flyout behavior. A \"mega menu\" is just NavigationMenuContent holding a richer l",
+};
+
+# NavigationMenu
+
+Complex site navigation with flyout content, built on Radix's Navigation Menu primitive for correct hover/focus/keyboard flyout behavior. A "mega menu" is just `NavigationMenuContent` holding a richer layout — there's no separate component to maintain for that pattern.
+
+<LiveDemo code={`<NavigationMenu>
+  <NavigationMenuList>
+    <NavigationMenuItem>
+      <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+      <NavigationMenuContent>
+        <div className="ui-grid ui-w-80 ui-gap-1 ui-p-4">
+          <NavigationMenuLink href="#">Analytics</NavigationMenuLink>
+          <NavigationMenuLink href="#">Automation</NavigationMenuLink>
+          <NavigationMenuLink href="#">Reporting</NavigationMenuLink>
+        </div>
+      </NavigationMenuContent>
+    </NavigationMenuItem>
+    <NavigationMenuItem>
+      <NavigationMenuLink href="#">Pricing</NavigationMenuLink>
+    </NavigationMenuItem>
+  </NavigationMenuList>
+</NavigationMenu>`} minHeight={260} />
+
+## Installation
+
+```tsx
+import {
+  NavigationMenu, NavigationMenuList, NavigationMenuItem,
+  NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink,
+} from "@labanaat/ui/navigation-menu";
+```
+
+## Props
+
+`NavigationMenuLink` accepts an `active` boolean for the current-page state. The rest follow Radix's Navigation Menu API directly (`NavigationMenu` accepts `value`/`defaultValue`/`onValueChange` for controlled/uncontrolled open flyouts).

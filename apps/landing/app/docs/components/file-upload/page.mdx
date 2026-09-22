@@ -1,0 +1,41 @@
+
+export const metadata = {
+  title: "FileUpload",
+  description: "Drag-and-drop zone with an always-present \"browse\" button, so drag-and-drop is never the only way to select a file. Fully controlled: the component reports changes via onFilesChange rather than owning",
+};
+
+# FileUpload
+
+Drag-and-drop zone with an always-present "browse" button, so drag-and-drop is never the only way to select a file. Fully controlled: the component reports changes via `onFilesChange` rather than owning selection state itself.
+
+<LiveDemo noInline minHeight={260} code={`function Demo() {
+  const [files, setFiles] = useState([]);
+  return (
+    <FileUpload
+      label="Attachments"
+      files={files}
+      onFilesChange={setFiles}
+      multiple
+      maxSizeBytes={5 * 1024 * 1024}
+    />
+  );
+}
+render(<Demo />);`} />
+
+## Installation
+
+```tsx
+import { FileUpload } from "@labanaat/ui/file-upload";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "files", type: "File[]", description: "Controlled list of selected files" },
+  { name: "onFilesChange", type: "(files: File[]) => void", description: "Called whenever the selection changes" },
+  { name: "label", type: "string", description: "Field label" },
+  { name: "accept", type: "string", description: "Native file-input accept filter" },
+  { name: "multiple", type: "boolean", default: "false", description: "Allow selecting more than one file" },
+  { name: "maxSizeBytes", type: "number", description: "Files over this size are silently rejected" },
+  { name: "disabled", type: "boolean", default: "false", description: "Disables interaction" },
+]} />

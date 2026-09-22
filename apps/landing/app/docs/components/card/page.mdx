@@ -1,0 +1,36 @@
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@labanaat/ui/card";
+import { Button } from "@labanaat/ui/button";
+
+export const metadata = {
+  title: "Card",
+  description: "Compound container — compose Card.Header, Card.Title, Card.Description, Card.Content, and Card.Footer instead of configuring one big component.",
+};
+
+# Card
+
+Compound container — compose `Card.Header`, `Card.Title`, `Card.Description`, `Card.Content`, and `Card.Footer` instead of configuring one big component.
+
+<LiveDemo code={`<Card className="ui-w-72">
+    <CardHeader>
+      <CardTitle>Team plan</CardTitle>
+      <CardDescription>Billed annually, up to 10 seats.</CardDescription>
+    </CardHeader>
+    <CardContent>
+      <p className="ui-text-[var(--ui-text-sm)] ui-text-[var(--ui-fg-muted)]">7 of 10 seats used.</p>
+    </CardContent>
+    <CardFooter>
+      <Button size="sm">Manage plan</Button>
+    </CardFooter>
+  </Card>`} />
+
+## Installation
+
+```tsx
+import { Card } from "@labanaat/ui/card";
+// Card.Header, Card.Title, Card.Description, Card.Content, Card.Footer
+// are attached to Card, or import each as a named export directly.
+```
+
+## Props
+
+Card and its subcomponents accept all standard `div`/`h3`/`p` HTML attributes (`className`, `children`, etc.) — there is no bespoke prop API. Compose exactly the sections you need.

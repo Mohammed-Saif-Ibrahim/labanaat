@@ -1,0 +1,75 @@
+export const metadata = {
+  title: "DataGrid",
+  description: "A spreadsheet-like grid for dense, editable data — distinct from DataTable: adds column resizing and inline cell editing on top of the same TanStack Table foundation. Reach for DataTable for…",
+};
+
+# DataGrid
+
+A spreadsheet-like grid for dense, editable data — distinct from `DataTable`: adds column resizing and inline cell editing on top of the same TanStack Table foundation. Reach for `DataTable` for display/sort/paginate; reach for `DataGrid` when users need to resize columns or edit values directly.
+
+<LiveDemo code={`<DataGrid
+  columns={[
+    { accessorKey: "name", header: "Name" },
+    { accessorKey: "role", header: "Role" },
+    { accessorKey: "status", header: "Status" },
+  ]}
+  data={[
+    { name: "Ada Lovelace", role: "Owner", status: "Active" },
+    { name: "Grace Hopper", role: "Admin", status: "Active" },
+    { name: "Alan Turing", role: "Member", status: "Invited" },
+  ]}
+/>`} minHeight={220} />
+
+Drag a column's right edge to resize it (or focus the resize handle and use the Left/Right arrow keys).
+
+## Inline editing
+
+Use `DataGridEditableCell` inside a column's `cell` renderer — click a cell to edit, Enter to commit, Escape to discard.
+
+<LiveDemo noInline minHeight={220} code={`function Demo() {
+  const [data, setData] = useState([
+    { id: "1", name: "Ada Lovelace", role: "Owner" },
+    { id: "2", name: "Grace Hopper", role: "Admin" },
+  ]);
+
+  function updateCell(rowIndex, key, value) {
+    setData((rows) => rows.map((r, i) => (i === rowIndex ? { ...r, [key]: value } : r)));
+  }
+
+  const columns = [
+    {
+      accessorKey: "name",
+      header: "Name",
+      cell: ({ row, getValue }) => (
+        <DataGridEditableCell value={getValue()} onCommit={(v) => updateCell(row.index, "name", v)} />
+      ),
+    },
+    {
+      accessorKey: "role",
+      header: "Role",
+      cell: ({ row, getValue }) => (
+        <DataGridEditableCell value={getValue()} onCommit={(v) => updateCell(row.index, "role", v)} />
+      ),
+    },
+  ];
+
+  return <DataGrid columns={columns} data={data} />;
+}
+render(<Demo />);`} />
+
+## Installation
+
+```tsx
+import { DataGrid, DataGridEditableCell } from "@labanaat/ui/data-grid";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "columns", type: "DataGridColumn<T>[]", description: "Same shape as TanStack's ColumnDef" },
+  { name: "data", type: "T[]", description: "Row data" },
+  { name: "isLoading", type: "boolean", default: "false", description: "Shows skeleton rows" },
+  { name: "emptyTitle / emptyDescription", type: "string", description: "Shown when data is empty" },
+  { name: "sorting / onSortingChange", type: "SortingState", description: "Controlled sorting; omit to manage internally" },
+  { name: "enableColumnResizing", type: "boolean", default: "true", description: "Shows drag handles on column edges" },
+]} />

@@ -1,0 +1,33 @@
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@labanaat/ui/tabs";
+
+export const metadata = {
+  title: "Tabs",
+  description: "Built on Radix's Tabs primitive — arrow-key navigation between triggers, correct aria-selected/aria-controls wiring.",
+};
+
+# Tabs
+
+Built on Radix's Tabs primitive — arrow-key navigation between triggers, correct `aria-selected`/`aria-controls` wiring.
+
+<LiveDemo code={`<Tabs defaultValue="account" className="ui-w-72">
+    <TabsList>
+      <TabsTrigger value="account">Account</TabsTrigger>
+      <TabsTrigger value="password">Password</TabsTrigger>
+    </TabsList>
+    <TabsContent value="account">
+      <p className="ui-text-[var(--ui-text-sm)] ui-text-[var(--ui-fg-muted)]">Manage your account settings.</p>
+    </TabsContent>
+    <TabsContent value="password">
+      <p className="ui-text-[var(--ui-text-sm)] ui-text-[var(--ui-fg-muted)]">Change your password here.</p>
+    </TabsContent>
+  </Tabs>`} />
+
+## Installation
+
+```tsx
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@labanaat/ui/tabs";
+```
+
+## Props
+
+`Tabs` accepts Radix's `Tabs.Root` props (`value`/`defaultValue`/`onValueChange`, `orientation`). `TabsList`, `TabsTrigger` (`value`, `disabled`), and `TabsContent` (`value`) follow Radix's Tabs API directly.

@@ -1,0 +1,48 @@
+export const metadata = {
+  title: "FilterBuilder",
+  description: "An interactive query-condition builder (field + operator + value rows, joined by AND/OR) for search and data-table filtering UIs. Pure composition of Select/Input/Button — no new dependency, since…",
+};
+
+# FilterBuilder
+
+An interactive query-condition builder (field + operator + value rows, joined by AND/OR) for search and data-table filtering UIs. Pure composition of `Select`/`Input`/`Button` — no new dependency, since this is fundamentally a data-shape problem, not an interaction-mechanics one like `Kanban`'s drag-and-drop.
+
+<LiveDemo noInline minHeight={220} code={`function Demo() {
+  const [logic, setLogic] = useState("AND");
+  const [conditions, setConditions] = useState([
+    { id: "1", field: "status", operator: "eq", value: "Active" },
+  ]);
+  return (
+    <FilterBuilder
+      fields={[
+        { value: "name", label: "Name" },
+        { value: "status", label: "Status" },
+        { value: "role", label: "Role" },
+      ]}
+      conditions={conditions}
+      onConditionsChange={setConditions}
+      logic={logic}
+      onLogicChange={setLogic}
+    />
+  );
+}
+render(<Demo />);`} />
+
+Deliberately scoped to a flat condition list joined by one shared AND/OR operator, not arbitrarily nested groups — covers the large majority of real filter UIs without the complexity of a full recursive expression tree.
+
+## Installation
+
+```tsx
+import { FilterBuilder } from "@labanaat/ui/filter-builder";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "fields", type: "{ value, label }[]", description: "Selectable fields" },
+  { name: "operators", type: "{ value, label }[]", default: "eq / neq / contains / gt / lt", description: "Selectable operators" },
+  { name: "conditions", type: "FilterCondition[]", description: "Controlled list of { id, field, operator, value }" },
+  { name: "onConditionsChange", type: "(conditions) => void", description: "Called whenever a condition is added, edited, or removed" },
+  { name: "logic", type: '"AND" | "OR"', default: '"AND"', description: "Logic joining conditions after the first" },
+  { name: "onLogicChange", type: "(logic) => void", description: "Called when the AND/OR toggle changes" },
+]} />

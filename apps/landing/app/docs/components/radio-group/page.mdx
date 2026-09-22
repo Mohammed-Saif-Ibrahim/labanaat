@@ -1,0 +1,34 @@
+import { RadioGroup } from "@labanaat/ui/radio-group";
+
+export const metadata = {
+  title: "RadioGroup",
+  description: "Single-choice group with roving tabindex and arrow-key navigation, provided by Radix.",
+};
+
+# RadioGroup
+
+Single-choice group with roving tabindex and arrow-key navigation, provided by Radix.
+
+<LiveDemo code={`<RadioGroup
+    label="Default member permissions"
+    defaultValue="member"
+    options={[
+      { value: "viewer", label: "Viewer", description: "Read-only access to all projects." },
+      { value: "member", label: "Member", description: "Can create and edit projects." },
+    ]}
+  />`} minHeight={180} />
+
+## Installation
+
+```tsx
+import { RadioGroup } from "@labanaat/ui/radio-group";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "options", type: "{ value, label, description?, disabled? }[]", description: "The radio options" },
+  { name: "label", type: "string", description: "Group label (aria-label)" },
+  { name: "value / defaultValue", type: "string", description: "Controlled / uncontrolled selected value" },
+  { name: "onValueChange", type: "(value) => void", description: "Change handler" },
+]} />

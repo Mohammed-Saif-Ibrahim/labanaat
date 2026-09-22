@@ -1,0 +1,37 @@
+import { Select } from "@labanaat/ui/select";
+
+export const metadata = {
+  title: "Select",
+  description: "Custom-styled, fully accessible select built on Radix's Select primitive — correct listbox semantics, typeahead, and keyboard navigation.",
+};
+
+# Select
+
+Custom-styled, fully accessible select built on Radix's Select primitive — correct listbox semantics, typeahead, and keyboard navigation.
+
+<LiveDemo code={`<Select
+    label="Timezone"
+    defaultValue="utc"
+    options={[
+      { value: "utc", label: "UTC" },
+      { value: "est", label: "Eastern (US)" },
+      { value: "pst", label: "Pacific (US)" },
+    ]}
+  />`} minHeight={200} />
+
+## Installation
+
+```tsx
+import { Select } from "@labanaat/ui/select";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "options", type: "{ value, label, disabled? }[]", description: "The selectable options" },
+  { name: "value / defaultValue", type: "string", description: "Controlled / uncontrolled selected value" },
+  { name: "onValueChange", type: "(value) => void", description: "Change handler" },
+  { name: "label", type: "string", description: "Field label" },
+  { name: "placeholder", type: "string", description: "Shown when no value is selected" },
+  { name: "disabled", type: "boolean", default: "false", description: "Disables interaction" },
+]} />

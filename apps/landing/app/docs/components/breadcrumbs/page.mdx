@@ -1,0 +1,25 @@
+import { Breadcrumbs } from "@labanaat/ui/breadcrumbs";
+
+export const metadata = {
+  title: "Breadcrumbs",
+  description: "Breadcrumb trail with a nav landmark and aria-current=\"page\" on the final item.",
+};
+
+# Breadcrumbs
+
+Breadcrumb trail with a `nav` landmark and `aria-current="page"` on the final item.
+
+<LiveDemo code={`<Breadcrumbs items={[{ label: "Dashboard", href: "#" }, { label: "Settings", href: "#" }, { label: "Team" }]} />`} />
+
+## Installation
+
+```tsx
+import { Breadcrumbs } from "@labanaat/ui/breadcrumbs";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "items", type: "{ label, href?, onClick? }[]", description: "Trail items; the last item is treated as the current page" },
+  { name: "separator", type: "ReactNode", default: '"/"', description: "Separator between items" },
+]} />

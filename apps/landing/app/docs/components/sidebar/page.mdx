@@ -1,0 +1,76 @@
+export const metadata = {
+  title: "Sidebar",
+  description: "A persistent navigation column for dashboards and admin layouts. Positioned fixed to the viewport by default (the real-world case — a true app-shell sidebar), so the demo below scopes it to relative…",
+};
+
+# Sidebar
+
+A persistent navigation column for dashboards and admin layouts. Positioned `fixed` to the viewport by default (the real-world case — a true app-shell sidebar), so the demo below scopes it to `relative` within a contained box instead, via the same `className` override you'd use for any custom layout.
+
+<LiveDemo code={`<div className="ui-h-80 ui-w-full ui-max-w-xs ui-overflow-hidden ui-rounded-[var(--ui-radius-lg)] ui-border ui-border-[var(--ui-border)]">
+  <Sidebar defaultCollapsed={false} className="ui-relative ui-flex ui-h-full ui-w-full ui-max-w-none">
+    <SidebarHeader>
+      <SidebarTrigger />
+      <SidebarHeaderTitle>Acme Inc</SidebarHeaderTitle>
+    </SidebarHeader>
+    <SidebarContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Workspace</SidebarGroupLabel>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              active
+              icon={<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.3" /><rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.3" /><rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.3" /><rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.3" /></svg>}
+            >
+              Overview
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              icon={<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5.5" r="2.5" stroke="currentColor" strokeWidth="1.3" /><path d="M3 14c0-2.5 2.2-4.5 5-4.5s5 2 5 4.5" stroke="currentColor" strokeWidth="1.3" /></svg>}
+            >
+              Members
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              icon={<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2" stroke="currentColor" strokeWidth="1.3" /><path d="M8 1.5v2M8 12.5v2M14.5 8h-2M3.5 8h-2M12.5 3.5l-1.4 1.4M4.9 11.1l-1.4 1.4M12.5 12.5l-1.4-1.4M4.9 4.9L3.5 3.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" /></svg>}
+            >
+              Settings
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroup>
+    </SidebarContent>
+    <SidebarFooter>
+      <span className="ui-text-[var(--ui-text-xs)] ui-text-[var(--ui-fg-muted)]">v1.0.0</span>
+    </SidebarFooter>
+  </Sidebar>
+</div>`} minHeight={340} />
+
+Click the toggle icon in the header to collapse it to icon-only width.
+
+## Installation
+
+```tsx
+import {
+  Sidebar, SidebarHeader, SidebarHeaderTitle, SidebarContent, SidebarFooter,
+  SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuItem,
+  SidebarMenuButton, SidebarTrigger,
+} from "@labanaat/ui/sidebar";
+```
+
+In a real app shell, mount `Sidebar` without a className override — it's `fixed` to the viewport by design, so the rest of your layout just needs a matching `margin-left` (or `md:ml-<width>`) on the main content column. See the [templates gallery](/templates) for this pattern used in a full, real application.
+
+## Props
+
+<PropsTable rows={[
+  { name: "collapsed / defaultCollapsed", type: "boolean", description: "Controlled / uncontrolled collapsed state" },
+  { name: "onCollapsedChange", type: "(collapsed) => void", description: "Change handler" },
+  { name: "width", type: "string", default: '"16rem"', description: "Width when expanded" },
+  { name: "collapsedWidth", type: "string", default: '"4rem"', description: "Width when collapsed" },
+  { name: "active", type: "boolean", description: "Marks a SidebarMenuButton as the current page" },
+  { name: "icon", type: "ReactNode", description: "Icon slot on SidebarMenuButton" },
+]} />
+
+`useSidebar()` exposes `{ collapsed, setCollapsed }` to any component nested inside `Sidebar`, for building custom triggers or collapse-aware content.

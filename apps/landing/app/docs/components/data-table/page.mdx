@@ -1,0 +1,86 @@
+export const metadata = {
+  title: "DataTable",
+  description: "A serious data grid built on TanStack Table's headless sorting/pagination/selection logic, rendered entirely through the library's own Table primitives — so it looks and themes exactly like every…",
+};
+
+# DataTable
+
+A serious data grid built on TanStack Table's headless sorting/pagination/selection logic, rendered entirely through the library's own `Table` primitives — so it looks and themes exactly like every other component, not like an embedded third-party widget. TanStack never appears in the import surface; column definitions are typed as `DataTableColumn<T>`, Labanaat's own name for the shape.
+
+<LiveDemo noInline minHeight={320} code={`const people = [
+  { id: "1", name: "Ada Lovelace", role: "Owner", status: "Active" },
+  { id: "2", name: "Grace Hopper", role: "Admin", status: "Active" },
+  { id: "3", name: "Alan Turing", role: "Member", status: "Invited" },
+  { id: "4", name: "Katherine Johnson", role: "Member", status: "Active" },
+  { id: "5", name: "Margaret Hamilton", role: "Admin", status: "Active" },
+];
+
+const columns = [
+  {
+    accessorKey: "name",
+    header: ({ column }) => <DataTableColumnHeader title="Name" column={column} />,
+  },
+  { accessorKey: "role", header: "Role" },
+  {
+    accessorKey: "status",
+    header: "Status",
+    cell: (info) => (
+      <Badge variant={info.getValue() === "Active" ? "success" : "warning"}>{info.getValue()}</Badge>
+    ),
+  },
+];
+
+function Demo() {
+  return <DataTable columns={columns} data={people} pageSize={3} />;
+}
+render(<Demo />);`} />
+
+## Loading and empty states
+
+<LiveDemo code={`<DataTable
+  columns={[{ accessorKey: "name", header: "Name" }, { accessorKey: "role", header: "Role" }]}
+  data={[]}
+  isLoading
+/>`} minHeight={220} />
+
+<LiveDemo code={`<DataTable
+  columns={[{ accessorKey: "name", header: "Name" }, { accessorKey: "role", header: "Role" }]}
+  data={[]}
+  emptyTitle="No members yet"
+  emptyDescription="Invite your first teammate to get started."
+/>`} minHeight={220} />
+
+## Row selection
+
+<LiveDemo noInline minHeight={260} code={`const people = [
+  { id: "1", name: "Ada Lovelace", role: "Owner" },
+  { id: "2", name: "Grace Hopper", role: "Admin" },
+];
+const columns = [
+  { accessorKey: "name", header: "Name" },
+  { accessorKey: "role", header: "Role" },
+];
+function Demo() {
+  return <DataTable columns={columns} data={people} enableRowSelection />;
+}
+render(<Demo />);`} />
+
+## Installation
+
+```tsx
+import { DataTable, DataTableColumnHeader, DataTablePagination } from "@labanaat/ui/data-table";
+import type { DataTableColumn } from "@labanaat/ui/data-table";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "columns", type: "DataTableColumn<T>[]", description: "Column definitions — same shape as TanStack's ColumnDef, re-exported under Labanaat's own name" },
+  { name: "data", type: "T[]", description: "Row data" },
+  { name: "isLoading", type: "boolean", default: "false", description: "Shows skeleton rows instead of data" },
+  { name: "emptyTitle / emptyDescription", type: "string", description: "Shown via EmptyState when data is empty" },
+  { name: "sorting / onSortingChange", type: "DataTableSortingState", description: "Controlled sorting; omit to manage internally" },
+  { name: "enableRowSelection", type: "boolean", default: "false", description: "Adds a leading checkbox column" },
+  { name: "rowSelection / onRowSelectionChange", type: "RowSelectionState", description: "Controlled row selection; omit to manage internally" },
+  { name: "pageSize", type: "number", description: "Enables built-in client-side pagination at this page size" },
+]} />

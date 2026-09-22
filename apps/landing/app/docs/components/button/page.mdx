@@ -1,0 +1,62 @@
+import { Button } from "@labanaat/ui/button";
+
+export const metadata = {
+  title: "Button",
+  description: "The foundational interactive element. Composable via asChild, with built-in loading and icon-slot support.",
+};
+
+# Button
+
+The foundational interactive element. Composable via `asChild`, with built-in loading and icon-slot support.
+
+<LiveDemo code={`<Button>Save changes</Button>`} />
+
+## Variants
+
+<LiveDemo code={`<div className="ui-flex ui-flex-wrap ui-gap-2">
+    <Button variant="primary">Primary</Button>
+    <Button variant="secondary">Secondary</Button>
+    <Button variant="outline">Outline</Button>
+    <Button variant="ghost">Ghost</Button>
+    <Button variant="danger">Danger</Button>
+    <Button variant="link">Link</Button>
+  </div>`} />
+
+## Sizes
+
+<LiveDemo code={`<div className="ui-flex ui-items-center ui-gap-2">
+    <Button size="sm">Small</Button>
+    <Button size="md">Medium</Button>
+    <Button size="lg">Large</Button>
+  </div>`} />
+
+## Loading state
+
+<LiveDemo code={`<Button isLoading>Saving…</Button>`} />
+
+## Composition with asChild
+
+Renders as the child element instead of a `<button>`, merging button styles onto it — useful for wrapping a `<Link>` or `<a>`.
+
+<LiveDemo code={`<Button asChild><a href="#">Read the docs</a></Button>`} />
+
+## Installation
+
+```bash
+npm install @labanaat/ui
+```
+
+```tsx
+import { Button } from "@labanaat/ui/button";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "variant", type: '"primary" | "secondary" | "outline" | "ghost" | "danger" | "link"', default: '"primary"', description: "Visual style" },
+  { name: "size", type: '"sm" | "md" | "lg" | "icon"', default: '"md"', description: "Size scale" },
+  { name: "asChild", type: "boolean", default: "false", description: "Render as the child element instead of a button" },
+  { name: "isLoading", type: "boolean", default: "false", description: "Shows a spinner and disables interaction" },
+  { name: "startIcon", type: "ReactNode", description: "Icon rendered before the label" },
+  { name: "endIcon", type: "ReactNode", description: "Icon rendered after the label" },
+]} />

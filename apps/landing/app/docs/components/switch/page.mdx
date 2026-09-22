@@ -1,0 +1,34 @@
+import { Switch } from "@labanaat/ui/switch";
+
+export const metadata = {
+  title: "Switch",
+  description: "Toggle for settings that take effect immediately — prefer over Checkbox when there's no separate save step.",
+};
+
+# Switch
+
+Toggle for settings that take effect immediately — prefer over `Checkbox` when there's no separate save step.
+
+<LiveDemo code={`<div className="ui-w-72">
+  <Switch
+    label="Require two-factor authentication"
+    description="All members must enable 2FA to sign in."
+    defaultChecked
+  />
+</div>`} />
+
+## Installation
+
+```tsx
+import { Switch } from "@labanaat/ui/switch";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "label", type: "ReactNode", description: "Field label" },
+  { name: "description", type: "string", description: "Helper text" },
+  { name: "checked / defaultChecked", type: "boolean", description: "Controlled / uncontrolled state" },
+  { name: "onCheckedChange", type: "(checked) => void", description: "Change handler" },
+  { name: "disabled", type: "boolean", default: "false", description: "Disables interaction" },
+]} />

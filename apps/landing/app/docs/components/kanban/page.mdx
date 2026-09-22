@@ -1,0 +1,55 @@
+export const metadata = {
+  title: "Kanban",
+  description: "A drag-and-drop board (task boards, pipelines, workflows), built on @dnd-kit for the drag mechanics — including real keyboard support (Tab to a card, Space to pick it up, arrow keys to move it, Space…",
+};
+
+# Kanban
+
+A drag-and-drop board (task boards, pipelines, workflows), built on `@dnd-kit` for the drag mechanics — including real keyboard support (Tab to a card, Space to pick it up, arrow keys to move it, Space to drop) via dnd-kit's keyboard sensor, which plain HTML5 drag events don't provide at all. The board's data is fully controlled — Kanban never owns it, only reports the reordered/moved result via `onColumnsChange`.
+
+<LiveDemo noInline minHeight={320} code={`function Demo() {
+  const [columns, setColumns] = useState([
+    {
+      id: "todo",
+      title: "To do",
+      items: [
+        { id: "1", title: "Design review" },
+        { id: "2", title: "Write tests" },
+      ],
+    },
+    {
+      id: "done",
+      title: "Done",
+      items: [{ id: "3", title: "Set up repo" }],
+    },
+  ]);
+  return (
+    <Kanban
+      columns={columns}
+      onColumnsChange={setColumns}
+      getItemId={(item) => item.id}
+      renderItem={(item) => (
+        <span className="ui-text-[var(--ui-text-sm)] ui-text-[var(--ui-fg)]">{item.title}</span>
+      )}
+    />
+  );
+}
+render(<Demo />);`} />
+
+Drag a card within a column to reorder it, or across columns to move it — or focus a card and use Space + arrow keys + Space.
+
+## Installation
+
+```tsx
+import { Kanban } from "@labanaat/ui/kanban";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "columns", type: "KanbanColumnData<T>[]", description: "{ id, title, items: T[] } per column" },
+  { name: "onColumnsChange", type: "(columns) => void", description: "Called after any reorder or cross-column move" },
+  { name: "getItemId", type: "(item: T) => string", description: "Returns a stable unique id for an item" },
+  { name: "renderItem", type: "(item: T) => ReactNode", description: "Renders a card's content" },
+  { name: "renderColumnHeader", type: "(column) => ReactNode", description: "Custom column header; defaults to a title + item count" },
+]} />

@@ -1,0 +1,195 @@
+/**
+ * @ui-system/ui — Design Tokens
+ * CSS custom properties are the single source of truth for theming.
+ * TypeScript definitions in `tokens/index.ts` mirror this file so
+ * consumers get autocomplete + type safety when reading/overriding tokens.
+ */
+
+:root {
+  color-scheme: light;
+
+  /* ---- Color: neutral scale ---- */
+  --ui-color-neutral-0: #ffffff;
+  --ui-color-neutral-50: #f8fafc;
+  --ui-color-neutral-100: #f1f5f9;
+  --ui-color-neutral-200: #e2e8f0;
+  --ui-color-neutral-300: #cbd5e1;
+  --ui-color-neutral-400: #94a3b8;
+  --ui-color-neutral-500: #64748b;
+  --ui-color-neutral-600: #475569;
+  --ui-color-neutral-700: #334155;
+  --ui-color-neutral-800: #1e293b;
+  --ui-color-neutral-900: #0f172a;
+  --ui-color-neutral-950: #020617;
+
+  /* ---- Color: brand / accent ---- */
+  --ui-color-primary-50: #eef2ff;
+  --ui-color-primary-100: #e0e7ff;
+  --ui-color-primary-200: #c7d2fe;
+  --ui-color-primary-300: #a5b4fc;
+  --ui-color-primary-400: #818cf8;
+  --ui-color-primary-500: #6366f1;
+  --ui-color-primary-600: #4f46e5;
+  --ui-color-primary-700: #4338ca;
+  --ui-color-primary-800: #3730a3;
+  --ui-color-primary-900: #312e81;
+
+  /* ---- Color: semantic ---- */
+  --ui-color-danger-500: #ef4444;
+  --ui-color-danger-600: #dc2626;
+  --ui-color-success-500: #22c55e;
+  --ui-color-success-600: #16a34a;
+  --ui-color-warning-500: #f59e0b;
+  --ui-color-warning-600: #d97706;
+
+  /* ---- Semantic role tokens (what components actually consume) ----
+     bg-subtle/bg-muted/border/border-strong are intentionally derived from
+     --ui-primary via color-mix() rather than flat neutral values. This is
+     what lets a single accent-color change (see the landing site's color
+     picker) tint the whole surface system — cards, dividers, subtle
+     backgrounds — coherently, without a website-wide saturated repaint.
+     The mix percentages stay low (3–14%) specifically so text contrast
+     and "this still reads as a neutral surface" are preserved. */
+  --ui-bg: var(--ui-color-neutral-0);
+  --ui-bg-subtle: color-mix(in srgb, var(--ui-primary) 4%, var(--ui-color-neutral-50));
+  --ui-bg-muted: color-mix(in srgb, var(--ui-primary) 7%, var(--ui-color-neutral-100));
+  --ui-fg: var(--ui-color-neutral-900);
+  --ui-fg-muted: var(--ui-color-neutral-500);
+  --ui-fg-on-primary: #ffffff;
+  --ui-border: color-mix(in srgb, var(--ui-primary) 10%, var(--ui-color-neutral-200));
+  --ui-border-strong: color-mix(in srgb, var(--ui-primary) 16%, var(--ui-color-neutral-300));
+  --ui-ring: var(--ui-color-primary-500);
+
+  --ui-primary: var(--ui-color-primary-600);
+  --ui-primary-hover: var(--ui-color-primary-700);
+  --ui-primary-active: var(--ui-color-primary-800);
+
+  --ui-danger: var(--ui-color-danger-600);
+  --ui-danger-hover: var(--ui-color-danger-700, #b91c1c);
+  --ui-success: var(--ui-color-success-600);
+  --ui-warning: var(--ui-color-warning-600);
+
+  /* ---- Typography ---- */
+  --ui-font-sans: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+  --ui-font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  --ui-text-xs: 0.75rem;
+  --ui-text-sm: 0.875rem;
+  --ui-text-base: 1rem;
+  --ui-text-lg: 1.125rem;
+  --ui-text-xl: 1.25rem;
+  --ui-text-2xl: 1.5rem;
+  --ui-text-3xl: 1.875rem;
+
+  --ui-leading-tight: 1.25;
+  --ui-leading-normal: 1.5;
+  --ui-leading-relaxed: 1.7;
+
+  --ui-tracking-tight: -0.01em;
+  --ui-tracking-normal: 0em;
+  --ui-tracking-wide: 0.02em;
+
+  --ui-font-weight-normal: 400;
+  --ui-font-weight-medium: 500;
+  --ui-font-weight-semibold: 600;
+  --ui-font-weight-bold: 700;
+
+  /* ---- Spacing scale ---- */
+  --ui-space-0: 0px;
+  --ui-space-1: 0.25rem;
+  --ui-space-2: 0.5rem;
+  --ui-space-3: 0.75rem;
+  --ui-space-4: 1rem;
+  --ui-space-5: 1.25rem;
+  --ui-space-6: 1.5rem;
+  --ui-space-8: 2rem;
+  --ui-space-10: 2.5rem;
+  --ui-space-12: 3rem;
+
+  /* ---- Radius ---- */
+  --ui-radius-sm: 0.25rem;
+  --ui-radius-md: 0.5rem;
+  --ui-radius-lg: 0.75rem;
+  --ui-radius-xl: 1rem;
+  --ui-radius-full: 9999px;
+
+  /* ---- Shadow ---- */
+  --ui-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --ui-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --ui-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --ui-shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+  /* ---- Motion ---- */
+  --ui-duration-fast: 100ms;
+  --ui-duration-base: 150ms;
+  --ui-duration-slow: 250ms;
+  --ui-easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ui-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+
+  /* ---- Focus ring (shared across all interactive components) ---- */
+  --ui-focus-ring: 0 0 0 2px var(--ui-bg), 0 0 0 4px var(--ui-ring);
+}
+
+/* ---- Dark theme ---- */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --ui-bg: var(--ui-color-neutral-950);
+  --ui-bg-subtle: color-mix(in srgb, var(--ui-primary) 8%, var(--ui-color-neutral-900));
+  --ui-bg-muted: color-mix(in srgb, var(--ui-primary) 12%, var(--ui-color-neutral-800));
+  --ui-fg: var(--ui-color-neutral-50);
+  --ui-fg-muted: var(--ui-color-neutral-400);
+  --ui-border: color-mix(in srgb, var(--ui-primary) 16%, var(--ui-color-neutral-800));
+  --ui-border-strong: color-mix(in srgb, var(--ui-primary) 22%, var(--ui-color-neutral-700));
+  --ui-primary: var(--ui-color-primary-500);
+  --ui-primary-hover: var(--ui-color-primary-400);
+  --ui-primary-active: var(--ui-color-primary-300);
+}
+
+/* ---- Explicit light theme ----
+   Mirrors :root exactly. Without this, a locally-scoped
+   `[data-theme="light"]` element (e.g. a "force light" demo panel nested
+   inside a page that's globally in dark mode) has no rule to re-assert
+   light values, and just inherits dark from its ancestor — :root alone
+   only wins when nothing else in the cascade overrides it. This makes
+   light an equal, explicitly selectable theme rather than only "the
+   absence of dark". */
+[data-theme="light"] {
+  color-scheme: light;
+  --ui-bg: var(--ui-color-neutral-0);
+  --ui-bg-subtle: color-mix(in srgb, var(--ui-primary) 4%, var(--ui-color-neutral-50));
+  --ui-bg-muted: color-mix(in srgb, var(--ui-primary) 7%, var(--ui-color-neutral-100));
+  --ui-fg: var(--ui-color-neutral-900);
+  --ui-fg-muted: var(--ui-color-neutral-500);
+  --ui-border: color-mix(in srgb, var(--ui-primary) 10%, var(--ui-color-neutral-200));
+  --ui-border-strong: color-mix(in srgb, var(--ui-primary) 16%, var(--ui-color-neutral-300));
+  --ui-primary: var(--ui-color-primary-600);
+  --ui-primary-hover: var(--ui-color-primary-700);
+  --ui-primary-active: var(--ui-color-primary-800);
+}
+
+/* ---- Reduced motion: respected globally, no per-component opt-in needed ---- */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --ui-duration-fast: 0ms;
+    --ui-duration-base: 0ms;
+    --ui-duration-slow: 0ms;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.ui-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

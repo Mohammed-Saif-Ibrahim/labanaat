@@ -1,0 +1,64 @@
+export const metadata = {
+  title: "CommandPalette",
+  description: "A searchable, keyboard-first command/navigation overlay, built on cmdk — no accessible Radix primitive exists for this pattern (the same situation as Combobox).",
+};
+
+# CommandPalette
+
+A searchable, keyboard-first command/navigation overlay, built on `cmdk` — no accessible Radix primitive exists for this pattern (the same situation as Combobox).
+
+<LiveDemo noInline minHeight={80} code={`function Demo() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open command palette</Button>
+      <CommandPalette open={open} onOpenChange={setOpen} label="Command menu">
+        <CommandInput placeholder="Type a command or search…" />
+        <CommandList>
+          <CommandEmpty>No results found.</CommandEmpty>
+          <CommandGroup heading="Pages">
+            <CommandItem onSelect={() => setOpen(false)}>Overview</CommandItem>
+            <CommandItem onSelect={() => setOpen(false)}>Members</CommandItem>
+            <CommandItem onSelect={() => setOpen(false)}>Billing</CommandItem>
+          </CommandGroup>
+          <CommandSeparator />
+          <CommandGroup heading="Actions">
+            <CommandItem onSelect={() => setOpen(false)}>
+              Invite member
+              <CommandShortcut>⌘I</CommandShortcut>
+            </CommandItem>
+          </CommandGroup>
+        </CommandList>
+      </CommandPalette>
+    </>
+  );
+}
+render(<Demo />);`} />
+
+## With a global keyboard shortcut
+
+Pass `shortcut="k"` to make Cmd/Ctrl+K toggle the palette from anywhere on the page — the standard "⌘K" pattern.
+
+```tsx
+<CommandPalette open={open} onOpenChange={setOpen} shortcut="k">
+  {/* ... */}
+</CommandPalette>
+```
+
+## Installation
+
+```tsx
+import {
+  CommandPalette, CommandInput, CommandList, CommandEmpty,
+  CommandGroup, CommandItem, CommandSeparator, CommandShortcut,
+} from "@labanaat/ui/command-palette";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "open / defaultOpen", type: "boolean", description: "Controlled / uncontrolled open state" },
+  { name: "onOpenChange", type: "(open) => void", description: "Change handler" },
+  { name: "shortcut", type: "string", description: 'Key that, combined with Cmd/Ctrl, toggles the palette — e.g. "k"' },
+  { name: "label", type: "string", default: '"Command palette"', description: "Accessible name for the dialog" },
+]} />

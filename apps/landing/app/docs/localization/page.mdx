@@ -1,0 +1,20 @@
+# Localization
+
+Components never hardcode user-facing strings. All generated text (dialog
+close labels, pagination labels, empty-state copy, etc.) is read from a
+content registry that you can override globally:
+
+```tsx
+import { UiContentProvider } from "@labanaat/ui";
+
+<UiContentProvider
+  content={{
+    dialog: { close: "Fermer" },
+    pagination: { previous: "Précédent", next: "Suivant" },
+  }}
+>
+  <App />
+</UiContentProvider>
+```
+
+Unset keys fall back to the English defaults, so partial overrides are safe.

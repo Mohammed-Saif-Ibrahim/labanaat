@@ -1,0 +1,28 @@
+import { Textarea } from "@labanaat/ui/textarea";
+
+export const metadata = {
+  title: "Textarea",
+  description: "Multi-line text field with the same label/description/error accessibility wiring as Input.",
+};
+
+# Textarea
+
+Multi-line text field with the same label/description/error accessibility wiring as `Input`.
+
+<LiveDemo code={`<Textarea label="Description" placeholder="What does your team do?" className="ui-w-72" />`} />
+
+## Installation
+
+```tsx
+import { Textarea } from "@labanaat/ui/textarea";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "label", type: "string", description: "Field label" },
+  { name: "hideLabel", type: "boolean", default: "false", description: "Visually hides the label while keeping it accessible" },
+  { name: "description", type: "string", description: "Helper text shown below the field" },
+  { name: "error", type: "string", description: "Error message; sets aria-invalid" },
+  { name: "rows", type: "number", default: "4", description: "Visible row count" },
+]} />

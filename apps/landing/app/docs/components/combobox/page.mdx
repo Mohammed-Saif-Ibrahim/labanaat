@@ -1,0 +1,41 @@
+import { Combobox } from "@labanaat/ui/combobox";
+
+export const metadata = {
+  title: "Combobox",
+  description: "A searchable single-select, implemented directly against the WAI-ARIA 1.2 combobox pattern — role=\"combobox\" on the input, role=\"listbox\" on the popup, and aria-activedescendant for virtual focus — si",
+};
+
+# Combobox
+
+A searchable single-select, implemented directly against the WAI-ARIA 1.2 combobox pattern — `role="combobox"` on the input, `role="listbox"` on the popup, and `aria-activedescendant` for virtual focus — since no accessible Radix combobox primitive currently exists.
+
+<LiveDemo code={`<Combobox
+    label="Country"
+    placeholder="Search countries…"
+    options={[
+      { value: "us", label: "United States" },
+      { value: "ca", label: "Canada" },
+      { value: "mx", label: "Mexico" },
+      { value: "fr", label: "France" },
+      { value: "de", label: "Germany" },
+      { value: "jp", label: "Japan" },
+    ]}
+  />`} minHeight={220} />
+
+## Installation
+
+```tsx
+import { Combobox } from "@labanaat/ui/combobox";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "options", type: "{ value, label, disabled? }[]", description: "The selectable options" },
+  { name: "value / defaultValue", type: "string", description: "Controlled / uncontrolled selected value" },
+  { name: "onValueChange", type: "(value) => void", description: "Change handler" },
+  { name: "label", type: "string", description: "Field label" },
+  { name: "placeholder", type: "string", description: "Input placeholder / listbox aria-label fallback" },
+  { name: "isLoading", type: "boolean", default: "false", description: "Shows a loading row for async option fetching" },
+  { name: "disabled", type: "boolean", default: "false", description: "Disables interaction" },
+]} />

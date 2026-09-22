@@ -1,0 +1,20 @@
+# Theming
+
+Themes are applied by setting `data-theme` on the document root. The
+library ships `light` (default) and `dark`; `"system"` defers to the OS.
+
+```tsx
+import { applyTheme } from "@labanaat/ui/tokens";
+
+applyTheme("dark");
+```
+
+To customize tokens for your brand, override any `--ui-*` CSS variable —
+no component code changes are required:
+
+```css
+:root {
+  --ui-primary: #7c3aed;
+  --ui-radius-md: 0.375rem;
+}
+```

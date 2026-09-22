@@ -1,0 +1,31 @@
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@labanaat/ui/accordion";
+
+export const metadata = {
+  title: "Accordion",
+  description: "Collapsible sections built on Radix's Accordion primitive for correct single/multiple expansion modes and arrow-key navigation between triggers.",
+};
+
+# Accordion
+
+Collapsible sections built on Radix's Accordion primitive for correct single/multiple expansion modes and arrow-key navigation between triggers.
+
+<LiveDemo code={`<Accordion type="single" collapsible className="ui-w-80">
+    <AccordionItem value="a">
+      <AccordionTrigger>What frameworks does this support?</AccordionTrigger>
+      <AccordionContent>Any React 18+ app — Next.js, Remix, Vite, or plain CRA.</AccordionContent>
+    </AccordionItem>
+    <AccordionItem value="b">
+      <AccordionTrigger>Is it tree-shakeable?</AccordionTrigger>
+      <AccordionContent>Yes — every component has its own build entry point.</AccordionContent>
+    </AccordionItem>
+  </Accordion>`} minHeight={200} />
+
+## Installation
+
+```tsx
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@labanaat/ui/accordion";
+```
+
+## Props
+
+`type="single"` allows one open item at a time; `type="multiple"` allows several. Pass `collapsible` to allow closing the last open item in single mode. `AccordionItem` requires a unique `value`; the rest follow Radix's Accordion API directly.

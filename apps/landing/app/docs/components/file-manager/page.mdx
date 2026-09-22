@@ -1,0 +1,54 @@
+export const metadata = {
+  title: "FileManager",
+  description: "A file/folder browser (grid or list view), reusing the library's own Breadcrumbs for the path trail. Fully controlled — the data, path, selection, and view mode all live in the consumer's state, the…",
+};
+
+# FileManager
+
+A file/folder browser (grid or list view), reusing the library's own `Breadcrumbs` for the path trail. Fully controlled — the data, path, selection, and view mode all live in the consumer's state, the same pattern as `DataTable`: FileManager reports intent (open, select, navigate) rather than owning any of it.
+
+<LiveDemo noInline minHeight={300} code={`const allItems = {
+  "Home": [
+    { id: "1", name: "Reports", type: "folder" },
+    { id: "2", name: "Projects", type: "folder" },
+    { id: "3", name: "budget.xlsx", type: "file", size: 245000 },
+  ],
+  "Home/Reports": [
+    { id: "4", name: "Q1.pdf", type: "file", size: 1200000 },
+    { id: "5", name: "Q2.pdf", type: "file", size: 980000 },
+  ],
+};
+
+function Demo() {
+  const [path, setPath] = useState(["Home"]);
+  const key = path.join("/");
+  return (
+    <FileManager
+      items={allItems[key] ?? []}
+      path={path}
+      onPathChange={setPath}
+    />
+  );
+}
+render(<Demo />);`} />
+
+Double-click (or focus + Enter) a folder to open it; click the breadcrumb trail to go back up.
+
+## Installation
+
+```tsx
+import { FileManager } from "@labanaat/ui/file-manager";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "items", type: "FileManagerItem[]", description: "{ id, name, type: \"file\" | \"folder\", size?, modifiedAt? } for the current folder" },
+  { name: "path", type: "string[]", description: "Breadcrumb path segments, root first" },
+  { name: "onPathChange", type: "(path) => void", description: "Called when the path changes (breadcrumb click, or opening a folder)" },
+  { name: "onOpen", type: "(item) => void", description: "Called when a file or folder is opened" },
+  { name: "selected / defaultSelected", type: "string[]", description: "Controlled / uncontrolled selected item ids" },
+  { name: "onSelectedChange", type: "(ids) => void", description: "Change handler" },
+  { name: "view / defaultView", type: '"grid" | "list"', default: '"grid"', description: "Controlled / uncontrolled view mode" },
+  { name: "onViewChange", type: "(view) => void", description: "Change handler" },
+]} />

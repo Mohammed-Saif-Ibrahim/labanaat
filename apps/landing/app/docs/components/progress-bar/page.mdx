@@ -1,0 +1,27 @@
+import { ProgressBar } from "@labanaat/ui/progress-bar";
+
+export const metadata = {
+  title: "ProgressBar",
+  description: "Determinate progress bar using native ARIA progressbar semantics (role, aria-valuenow/min/max).",
+};
+
+# ProgressBar
+
+Determinate progress bar using native ARIA progressbar semantics (`role`, `aria-valuenow`/`min`/`max`).
+
+<LiveDemo code={`<ProgressBar value={7} max={10} label="Seats used" showValue className="ui-w-64" />`} />
+
+## Installation
+
+```tsx
+import { ProgressBar } from "@labanaat/ui/progress-bar";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "value", type: "number", description: "Current progress value" },
+  { name: "max", type: "number", default: "100", description: "Maximum value" },
+  { name: "label", type: "string", description: "Label shown above the bar; also sets aria-labelledby" },
+  { name: "showValue", type: "boolean", default: "false", description: "Shows the computed percentage" },
+]} />

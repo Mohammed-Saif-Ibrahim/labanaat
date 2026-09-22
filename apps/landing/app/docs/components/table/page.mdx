@@ -1,0 +1,50 @@
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@labanaat/ui/table";
+import { Badge } from "@labanaat/ui/badge";
+
+export const metadata = {
+  title: "Table",
+  description: "Composable, semantic building blocks — a real <table>, not div-soup — plus a SortableTableHead helper with aria-sort wired up.",
+};
+
+# Table
+
+Composable, semantic building blocks — a real `<table>`, not div-soup — plus a `SortableTableHead` helper with `aria-sort` wired up.
+
+<LiveDemo code={`<Table>
+    <TableHeader>
+      <TableRow>
+        <TableHead>Name</TableHead>
+        <TableHead>Role</TableHead>
+        <TableHead>Status</TableHead>
+      </TableRow>
+    </TableHeader>
+    <TableBody>
+      <TableRow>
+        <TableCell>Ada Lovelace</TableCell>
+        <TableCell>Owner</TableCell>
+        <TableCell><Badge variant="success">Active</Badge></TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell>Grace Hopper</TableCell>
+        <TableCell>Admin</TableCell>
+        <TableCell><Badge variant="success">Active</Badge></TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>`} minHeight={200} />
+
+There is no `data`/`columns` prop — compose exactly the rows and columns your data needs, the same way you'd write HTML.
+
+## Installation
+
+```tsx
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, SortableTableHead } from "@labanaat/ui/table";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "direction", type: '"asc" | "desc" | null', description: "Current sort direction (on SortableTableHead)" },
+  { name: "onSortChange", type: "(direction) => void", description: "Called when the sort control is clicked (on SortableTableHead)" },
+]} />
+
+All other subcomponents accept standard HTML table-element attributes.

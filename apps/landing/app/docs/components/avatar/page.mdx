@@ -1,0 +1,34 @@
+import { Avatar } from "@labanaat/ui/avatar";
+
+export const metadata = {
+  title: "Avatar",
+  description: "Automatically falls back to initials when no image is provided or the image fails to load.",
+};
+
+# Avatar
+
+Automatically falls back to initials when no image is provided or the image fails to load.
+
+<LiveDemo code={`<Avatar name="Ada Lovelace" />`} />
+
+## Sizes
+
+<LiveDemo code={`<div className="ui-flex ui-items-center ui-gap-3">
+    <Avatar name="Ada Lovelace" size="sm" />
+    <Avatar name="Ada Lovelace" size="md" />
+    <Avatar name="Ada Lovelace" size="lg" />
+  </div>`} />
+
+## Installation
+
+```tsx
+import { Avatar } from "@labanaat/ui/avatar";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "name", type: "string", description: "Used to derive fallback initials and, if no src, the image alt text" },
+  { name: "src", type: "string", description: "Image URL. Falls back to initials if omitted or on load error" },
+  { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Size scale" },
+]} />

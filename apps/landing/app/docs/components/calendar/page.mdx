@@ -1,0 +1,65 @@
+export const metadata = {
+  title: "Calendar",
+  description: "A month-view date grid, implemented directly against the WAI-ARIA grid pattern — roving tabindex, arrow-key navigation between days, Home/End for week bounds, PageUp/PageDown for month navigation —…",
+};
+
+# Calendar
+
+A month-view date grid, implemented directly against the WAI-ARIA grid pattern — roving tabindex, arrow-key navigation between days, Home/End for week bounds, PageUp/PageDown for month navigation — since no Radix primitive exists for this. A foundation for a future, richer `DatePicker` variant; the current `DatePicker` uses the native input by design and doesn't depend on this component.
+
+<LiveDemo noInline code={`function Demo() {
+  const [selected, setSelected] = useState();
+  return <Calendar selected={selected} onSelect={setSelected} defaultMonth={new Date(2026, 0, 1)} />;
+}
+render(<Demo />);`} minHeight={340} />
+
+Click a date, or focus the grid (Tab into it) and use the arrow keys, Home/End, and Page Up/Page Down.
+
+## Range selection
+
+Pass `mode="range"` for start/end date selection — first click sets the start, second click sets the end (automatically swapped if it lands before the start), and a third click begins a new range.
+
+<LiveDemo noInline code={`function Demo() {
+  const [range, setRange] = useState();
+  return (
+    <Calendar
+      mode="range"
+      selectedRange={range}
+      onSelectRange={setRange}
+      defaultMonth={new Date(2026, 0, 1)}
+    />
+  );
+}
+render(<Demo />);`} minHeight={340} />
+
+## Min/max date range
+
+A separate concept from range *selection* above — this disables individual dates outside a fixed window, while still selecting a single date.
+
+<LiveDemo code={`<Calendar
+  defaultMonth={new Date(2026, 0, 1)}
+  minDate={new Date(2026, 0, 10)}
+  maxDate={new Date(2026, 0, 25)}
+/>`} minHeight={340} />
+
+## Installation
+
+```tsx
+import { Calendar } from "@labanaat/ui/calendar";
+```
+
+## Props
+
+<PropsTable rows={[
+  { name: "mode", type: '"single" | "range"', default: '"single"', description: "Selection mode" },
+  { name: "selected / defaultSelected", type: "Date", description: "Controlled / uncontrolled selected date (mode=\"single\")" },
+  { name: "onSelect", type: "(date: Date) => void", description: "Called when a date is selected (mode=\"single\")" },
+  { name: "selectedRange / defaultSelectedRange", type: "{ from: Date; to?: Date }", description: "Controlled / uncontrolled selected range (mode=\"range\")" },
+  { name: "onSelectRange", type: "(range) => void", description: "Called when the range changes (mode=\"range\")" },
+  { name: "month / defaultMonth", type: "Date", description: "Controlled / uncontrolled visible month" },
+  { name: "onMonthChange", type: "(date: Date) => void", description: "Called when the visible month changes" },
+  { name: "minDate / maxDate", type: "Date", description: "Disables dates outside this range" },
+  { name: "isDateDisabled", type: "(date: Date) => boolean", description: "Disables specific dates beyond the min/max range" },
+]} />
+
+Localization (non-English month/weekday labels) is a natural follow-up, not implemented here.
