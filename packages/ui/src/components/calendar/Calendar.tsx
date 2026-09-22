@@ -4,12 +4,26 @@ import { useControllableState } from "../../hooks";
 
 const WEEKDAY_LABELS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 const MONTH_LABELS = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December",
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 
 function isSameDay(a: Date, b: Date) {
-  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+  return (
+    a.getFullYear() === b.getFullYear() &&
+    a.getMonth() === b.getMonth() &&
+    a.getDate() === b.getDate()
+  );
 }
 function startOfMonth(d: Date) {
   return new Date(d.getFullYear(), d.getMonth(), 1);
@@ -58,43 +72,70 @@ export interface CalendarProps {
  * Calendar — a month-view date grid, implemented directly against the
  * WAI-ARIA grid pattern (roving tabindex, arrow-key navigation between
  * days, Home/End for week bounds, PageUp/PageDown for month navigation)
- * since no Radix primitive exists for this. Deliberately scoped to
- * single-date selection with English month/weekday labels for this
- * release — range selection and localization are natural follow-ups,
- * not implemented here. Foundation for a future, richer `DatePicker`
+ * since no Radix primitive exists for this. Supports both single-date
+ * and range selection (`mode="single" | "range"`); month/weekday/day
+ * labels are English-only for this release — pinned to "en-US" rather
+ * than the runtime's default locale so the accessible names stay
+ * deterministic regardless of the host OS's locale. Foundation for a
+ * future, richer `DatePicker`
  * variant; the current `DatePicker` uses the native input by design (see
  * its own docs page) and doesn't depend on this component.
  */
 export function Calendar({
   mode = "single",
-  selected, defaultSelected, onSelect,
-  selectedRange, defaultSelectedRange, onSelectRange,
-  month, defaultMonth, onMonthChange, minDate, maxDate, isDateDisabled, className,
+  selected,
+  defaultSelected,
+  onSelect,
+  selectedRange,
+  defaultSelectedRange,
+  onSelectRange,
+  month,
+  defaultMonth,
+  onMonthChange,
+  minDate,
+  maxDate,
+  isDateDisabled,
+  className,
 }: CalendarProps) {
   const [selectedDate, setSelectedDate] = useControllableState<Date | undefined>({
-    value: selected, defaultValue: defaultSelected, onChange: (value) => { if (value) onSelect?.(value); },
+    value: selected,
+    defaultValue: defaultSelected,
+    onChange: (value) => {
+      if (value) onSelect?.(value);
+    },
   });
   const [range, setRange] = useControllableState<DateRange | undefined>({
-    value: selectedRange, defaultValue: defaultSelectedRange, onChange: onSelectRange,
+    value: selectedRange,
+    defaultValue: defaultSelectedRange,
+    onChange: onSelectRange,
   });
   const [visibleMonth, setVisibleMonth] = useControllableState<Date>({
-    value: month, defaultValue: defaultMonth ?? selectedDate ?? range?.from ?? new Date(), onChange: onMonthChange,
+    value: month,
+    defaultValue: defaultMonth ?? selectedDate ?? range?.from ?? new Date(),
+    onChange: onMonthChange,
   });
-  const [focusedDate, setFocusedDate] = React.useState<Date>(selectedDate ?? range?.from ?? visibleMonth);
+  const [focusedDate, setFocusedDate] = React.useState<Date>(
+    selectedDate ?? range?.from ?? visibleMonth
+  );
   const dayRefs = React.useRef<Map<string, HTMLButtonElement>>(new Map());
   const gridRef = React.useRef<HTMLDivElement>(null);
 
   const grid = React.useMemo(() => getMonthGrid(visibleMonth), [visibleMonth]);
 
   function disabled(date: Date) {
-    if (minDate && date < new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate())) return true;
-    if (maxDate && date > new Date(maxDate.getFullYear(), maxDate.getMonth(), maxDate.getDate())) return true;
+    if (minDate && date < new Date(minDate.getFullYear(), minDate.getMonth(), minDate.getDate()))
+      return true;
+    if (maxDate && date > new Date(maxDate.getFullYear(), maxDate.getMonth(), maxDate.getDate()))
+      return true;
     return isDateDisabled?.(date) ?? false;
   }
 
   function commitFocus(date: Date) {
     setFocusedDate(date);
-    if (date.getMonth() !== visibleMonth.getMonth() || date.getFullYear() !== visibleMonth.getFullYear()) {
+    if (
+      date.getMonth() !== visibleMonth.getMonth() ||
+      date.getFullYear() !== visibleMonth.getFullYear()
+    ) {
       setVisibleMonth(startOfMonth(date));
     }
   }
@@ -118,7 +159,9 @@ export function Calendar({
       if (!range || (range.from && range.to)) {
         setRange({ from: date, to: undefined });
       } else {
-        setRange(date < range.from ? { from: date, to: range.from } : { from: range.from, to: date });
+        setRange(
+          date < range.from ? { from: date, to: range.from } : { from: range.from, to: date }
+        );
       }
     } else {
       setSelectedDate(date);
@@ -156,9 +199,20 @@ export function Calendar({
           onClick={() => setVisibleMonth(addMonths(visibleMonth, -1))}
           className="ui-inline-flex ui-h-7 ui-w-7 ui-items-center ui-justify-center ui-rounded-[var(--ui-radius-sm)] ui-text-[var(--ui-fg-muted)] hover:ui-bg-[var(--ui-bg-subtle)] hover:ui-text-[var(--ui-fg)] focus-visible:ui-outline-none focus-visible:ui-shadow-[var(--ui-focus-ring)]"
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M9 3L5 7L9 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path
+              d="M9 3L5 7L9 11"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </button>
-        <div className="ui-text-[var(--ui-text-sm)] ui-font-medium ui-text-[var(--ui-fg)]" aria-live="polite">
+        <div
+          className="ui-text-[var(--ui-text-sm)] ui-font-medium ui-text-[var(--ui-fg)]"
+          aria-live="polite"
+        >
           {MONTH_LABELS[visibleMonth.getMonth()]} {visibleMonth.getFullYear()}
         </div>
         <button
@@ -167,14 +221,30 @@ export function Calendar({
           onClick={() => setVisibleMonth(addMonths(visibleMonth, 1))}
           className="ui-inline-flex ui-h-7 ui-w-7 ui-items-center ui-justify-center ui-rounded-[var(--ui-radius-sm)] ui-text-[var(--ui-fg-muted)] hover:ui-bg-[var(--ui-bg-subtle)] hover:ui-text-[var(--ui-fg)] focus-visible:ui-outline-none focus-visible:ui-shadow-[var(--ui-focus-ring)]"
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M5 3L9 7L5 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+            <path
+              d="M5 3L9 7L5 11"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </button>
       </div>
 
-      <div ref={gridRef} role="grid" aria-label={`${MONTH_LABELS[visibleMonth.getMonth()]} ${visibleMonth.getFullYear()}`}>
+      <div
+        ref={gridRef}
+        role="grid"
+        aria-label={`${MONTH_LABELS[visibleMonth.getMonth()]} ${visibleMonth.getFullYear()}`}
+      >
         <div role="row" className="ui-mb-1 ui-grid ui-grid-cols-7">
           {WEEKDAY_LABELS.map((d) => (
-            <div key={d} role="columnheader" className="ui-text-center ui-text-[var(--ui-text-xs)] ui-font-medium ui-text-[var(--ui-fg-muted)]">
+            <div
+              key={d}
+              role="columnheader"
+              className="ui-text-center ui-text-[var(--ui-text-xs)] ui-font-medium ui-text-[var(--ui-fg-muted)]"
+            >
               {d}
             </div>
           ))}
@@ -183,13 +253,21 @@ export function Calendar({
           <div key={week} role="row" className="ui-grid ui-grid-cols-7">
             {grid.slice(week * 7, week * 7 + 7).map((date) => {
               const inMonth = date.getMonth() === visibleMonth.getMonth();
-              const isSelected = mode === "single" && selectedDate ? isSameDay(date, selectedDate) : false;
-              const isRangeStart = mode === "range" && range?.from ? isSameDay(date, range.from) : false;
+              const isSelected =
+                mode === "single" && selectedDate ? isSameDay(date, selectedDate) : false;
+              const isRangeStart =
+                mode === "range" && range?.from ? isSameDay(date, range.from) : false;
               const isRangeEnd = mode === "range" && range?.to ? isSameDay(date, range.to) : false;
               const isInRange =
                 mode === "range" && range?.from && range?.to
-                  ? date >= new Date(range.from.getFullYear(), range.from.getMonth(), range.from.getDate()) &&
-                    date <= new Date(range.to.getFullYear(), range.to.getMonth(), range.to.getDate())
+                  ? date >=
+                      new Date(
+                        range.from.getFullYear(),
+                        range.from.getMonth(),
+                        range.from.getDate()
+                      ) &&
+                    date <=
+                      new Date(range.to.getFullYear(), range.to.getMonth(), range.to.getDate())
                   : false;
               const isToday = isSameDay(date, new Date());
               const isTabbable = isSameDay(date, focusedDate);
@@ -199,7 +277,12 @@ export function Calendar({
                   key={date.toISOString()}
                   role="gridcell"
                   aria-selected={isSelected || isRangeStart || isRangeEnd}
-                  className={cn(isInRange && !isRangeStart && !isRangeEnd && "ui-bg-[color-mix(in_srgb,var(--ui-primary)_12%,transparent)]")}
+                  className={cn(
+                    isInRange &&
+                      !isRangeStart &&
+                      !isRangeEnd &&
+                      "ui-bg-[color-mix(in_srgb,var(--ui-primary)_12%,transparent)]"
+                  )}
                 >
                   <button
                     ref={(el) => {
@@ -208,7 +291,11 @@ export function Calendar({
                     }}
                     type="button"
                     tabIndex={isTabbable ? 0 : -1}
-                    aria-label={date.toLocaleDateString(undefined, { month: "long", day: "numeric", year: "numeric" })}
+                    aria-label={date.toLocaleDateString("en-US", {
+                      month: "long",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
                     aria-current={isToday ? "date" : undefined}
                     disabled={isDisabled}
                     onClick={() => selectDate(date)}
@@ -218,9 +305,18 @@ export function Calendar({
                       "ui-flex ui-h-9 ui-w-9 ui-items-center ui-justify-center ui-rounded-[var(--ui-radius-md)] ui-text-[var(--ui-text-sm)] ui-transition-colors",
                       "focus-visible:ui-outline-none focus-visible:ui-shadow-[var(--ui-focus-ring)]",
                       !inMonth && "ui-text-[var(--ui-fg-muted)] ui-opacity-40",
-                      inMonth && !isSelected && !isRangeStart && !isRangeEnd && "ui-text-[var(--ui-fg)] hover:ui-bg-[var(--ui-bg-subtle)]",
-                      (isSelected || isRangeStart || isRangeEnd) && "ui-bg-[var(--ui-primary)] ui-text-white hover:ui-bg-[var(--ui-primary-hover)]",
-                      isToday && !isSelected && !isRangeStart && !isRangeEnd && "ui-font-semibold ui-text-[var(--ui-primary)]",
+                      inMonth &&
+                        !isSelected &&
+                        !isRangeStart &&
+                        !isRangeEnd &&
+                        "ui-text-[var(--ui-fg)] hover:ui-bg-[var(--ui-bg-subtle)]",
+                      (isSelected || isRangeStart || isRangeEnd) &&
+                        "ui-bg-[var(--ui-primary)] ui-text-white hover:ui-bg-[var(--ui-primary-hover)]",
+                      isToday &&
+                        !isSelected &&
+                        !isRangeStart &&
+                        !isRangeEnd &&
+                        "ui-font-semibold ui-text-[var(--ui-primary)]",
                       isDisabled && "ui-cursor-not-allowed ui-opacity-30 hover:ui-bg-transparent"
                     )}
                   >

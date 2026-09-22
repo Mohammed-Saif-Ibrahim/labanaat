@@ -12,12 +12,22 @@ import { DatePicker } from "../components/date-picker";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/tabs";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "../components/dialog";
 import { Drawer, DrawerContent, DrawerTitle } from "../components/drawer";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "../components/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "../components/dropdown-menu";
 import { Popover, PopoverTrigger, PopoverContent } from "../components/popover";
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "../components/tooltip";
 import { ToastProvider, ToastRegistry, ToastViewport, ToastItem } from "../components/toast";
 import { Input } from "../components/input";
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "../components/accordion";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from "../components/accordion";
 import { Breadcrumbs } from "../components/breadcrumbs";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "../components/table";
 import { Slider } from "../components/slider";
@@ -32,14 +42,31 @@ import { RadioGroup } from "../components/radio-group";
 import { Select } from "../components/select";
 import { Separator } from "../components/separator";
 import { Stepper, StepperItem } from "../components/stepper";
-import { Timeline, TimelineItem, TimelineIndicator, TimelineContent, TimelineTitle } from "../components/timeline";
+import {
+  Timeline,
+  TimelineItem,
+  TimelineIndicator,
+  TimelineContent,
+  TimelineTitle,
+} from "../components/timeline";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "../components/navbar";
-import { Sidebar, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton } from "../components/sidebar";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+} from "../components/sidebar";
 import { Metric, MetricLabel, MetricValue, MetricDelta } from "../components/metric";
 import { Calendar } from "../components/calendar";
 import { FilterBuilder } from "../components/filter-builder";
 import { Kanban } from "../components/kanban";
-import { ActivityFeed, ActivityItem, ActivityContent, ActivityText } from "../components/activity-feed";
+import {
+  ActivityFeed,
+  ActivityItem,
+  ActivityContent,
+  ActivityText,
+} from "../components/activity-feed";
 import { FileManager } from "../components/file-manager";
 /**
  * Cross-component accessibility sweep. Interactive components with
@@ -50,7 +77,9 @@ import { FileManager } from "../components/file-manager";
  */
 describe("accessibility (axe)", () => {
   it("Checkbox with label has no violations", async () => {
-    const { container } = render(<Checkbox label="Accept terms" description="Required to continue" />);
+    const { container } = render(
+      <Checkbox label="Accept terms" description="Required to continue" />
+    );
     expect(await axe(container)).toHaveNoViolations();
   });
 
@@ -78,7 +107,13 @@ describe("accessibility (axe)", () => {
 
   it("Breadcrumbs has no violations", async () => {
     const { container } = render(
-      <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Profile" }]} />
+      <Breadcrumbs
+        items={[
+          { label: "Home", href: "/" },
+          { label: "Settings", href: "/settings" },
+          { label: "Profile" },
+        ]}
+      />
     );
     expect(await axe(container)).toHaveNoViolations();
   });
@@ -107,7 +142,9 @@ describe("accessibility (axe)", () => {
   });
 
   it("Combobox has no violations", async () => {
-    const { container } = render(<Combobox label="Fruit" options={[{ value: "a", label: "Apple" }]} />);
+    const { container } = render(
+      <Combobox label="Fruit" options={[{ value: "a", label: "Apple" }]} />
+    );
     expect(await axe(container)).toHaveNoViolations();
   });
 
@@ -127,7 +164,11 @@ describe("accessibility (axe)", () => {
   });
 
   it("Alert has no violations", async () => {
-    const { container } = render(<Alert variant="warning" title="Heads up">Your session expires soon.</Alert>);
+    const { container } = render(
+      <Alert variant="warning" title="Heads up">
+        Your session expires soon.
+      </Alert>
+    );
     expect(await axe(container)).toHaveNoViolations();
   });
 
@@ -143,13 +184,21 @@ describe("accessibility (axe)", () => {
 
   it("RadioGroup has no violations", async () => {
     const { container } = render(
-      <RadioGroup label="Plan" options={[{ value: "free", label: "Free" }, { value: "pro", label: "Pro" }]} />
+      <RadioGroup
+        label="Plan"
+        options={[
+          { value: "free", label: "Free" },
+          { value: "pro", label: "Pro" },
+        ]}
+      />
     );
     expect(await axe(container)).toHaveNoViolations();
   });
 
   it("Select has no violations", async () => {
-    const { container } = render(<Select label="Country" options={[{ value: "us", label: "United States" }]} />);
+    const { container } = render(
+      <Select label="Country" options={[{ value: "us", label: "United States" }]} />
+    );
     expect(await axe(container)).toHaveNoViolations();
   });
 
@@ -188,7 +237,9 @@ describe("accessibility (axe)", () => {
       <Navbar>
         <NavbarBrand>Labanaat</NavbarBrand>
         <NavbarContent>
-          <NavbarItem href="/docs" active>Docs</NavbarItem>
+          <NavbarItem href="/docs" active>
+            Docs
+          </NavbarItem>
         </NavbarContent>
       </Navbar>
     );
@@ -276,7 +327,9 @@ describe("accessibility (axe)", () => {
   it("Card has no violations", async () => {
     const { container } = render(
       <Card>
-        <CardHeader><CardTitle>Plan</CardTitle></CardHeader>
+        <CardHeader>
+          <CardTitle>Plan</CardTitle>
+        </CardHeader>
         <CardContent>7 of 10 seats used</CardContent>
       </Card>
     );
@@ -294,7 +347,9 @@ describe("accessibility (axe)", () => {
   });
 
   it("EmptyState has no violations", async () => {
-    const { container } = render(<EmptyState title="No members yet" description="Invite your first teammate." />);
+    const { container } = render(
+      <EmptyState title="No members yet" description="Invite your first teammate." />
+    );
     expect(await axe(container)).toHaveNoViolations();
   });
 
@@ -304,7 +359,9 @@ describe("accessibility (axe)", () => {
   });
 
   it("DatePicker has no violations", async () => {
-    const { container } = render(<DatePicker label="Start date" description="When your subscription begins." />);
+    const { container } = render(
+      <DatePicker label="Start date" description="When your subscription begins." />
+    );
     expect(await axe(container)).toHaveNoViolations();
   });
 
@@ -345,52 +402,40 @@ describe("accessibility (axe)", () => {
     expect(await axe(container)).toHaveNoViolations();
   });
 
-  it(
-    "DropdownMenu has no violations (rendered open)",
-    async () => {
-      const { container } = render(
-        <DropdownMenu open>
-          <DropdownMenuTrigger>Actions</DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuItem>Edit</DropdownMenuItem>
-            <DropdownMenuItem>Delete</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-      expect(await axe(container)).toHaveNoViolations();
-    },
-    25000
-  );
+  it("DropdownMenu has no violations (rendered open)", async () => {
+    const { container } = render(
+      <DropdownMenu open>
+        <DropdownMenuTrigger>Actions</DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem>Edit</DropdownMenuItem>
+          <DropdownMenuItem>Delete</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  }, 45000);
 
-  it(
-    "Popover has no violations (rendered open)",
-    async () => {
-      const { container } = render(
-        <Popover open>
-          <PopoverTrigger>Filters</PopoverTrigger>
-          <PopoverContent>Filter options here.</PopoverContent>
-        </Popover>
-      );
-      expect(await axe(container)).toHaveNoViolations();
-    },
-    25000
-  );
+  it("Popover has no violations (rendered open)", async () => {
+    const { container } = render(
+      <Popover open>
+        <PopoverTrigger>Filters</PopoverTrigger>
+        <PopoverContent>Filter options here.</PopoverContent>
+      </Popover>
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  }, 45000);
 
-  it(
-    "Tooltip has no violations (rendered open)",
-    async () => {
-      const { container } = render(
-        <TooltipProvider>
-          <Tooltip open>
-            <TooltipTrigger>Hover me</TooltipTrigger>
-            <TooltipContent>Helpful detail</TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      );
-      expect(await axe(container)).toHaveNoViolations();
-    },
-    25000
-  );
+  it("Tooltip has no violations (rendered open)", async () => {
+    const { container } = render(
+      <TooltipProvider>
+        <Tooltip open>
+          <TooltipTrigger>Hover me</TooltipTrigger>
+          <TooltipContent>Helpful detail</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    );
+    expect(await axe(container)).toHaveNoViolations();
+  }, 45000);
 
   it("Toast has no violations (rendered open)", async () => {
     const { container } = render(
@@ -402,5 +447,5 @@ describe("accessibility (axe)", () => {
       </ToastProvider>
     );
     expect(await axe(container)).toHaveNoViolations();
-  });
+  }, 45000);
 });

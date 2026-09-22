@@ -19,7 +19,7 @@ jobs:
       - name: Typecheck every workspace package
         run: pnpm -r exec tsc --noEmit
       - run: pnpm build
-      - run: pnpm test -- --coverage
+      - run: pnpm --filter @labanaat/ui test:coverage
       - run: pnpm test:a11y
 
   # Verifies the package actually works once published — not just inside
