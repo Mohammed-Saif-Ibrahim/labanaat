@@ -1,7 +1,7 @@
 import "@labanaat/ui/styles.css";
 import "./globals.css";
 import type { ReactNode } from "react";
-import { Instrument_Sans, JetBrains_Mono } from "next/font/google";
+import { Instrument_Sans } from "next/font/google";
 import { ThemeProvider } from "./theme-provider";
 import { SiteChrome } from "./site-chrome";
 import { Analytics } from "@vercel/analytics/react";
@@ -9,13 +9,6 @@ import { Analytics } from "@vercel/analytics/react";
 const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-mono",
   display: "swap",
 });
 
@@ -71,7 +64,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={`${instrumentSans.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" className={instrumentSans.variable}>
       <body className="ui-flex ui-min-h-screen ui-flex-col">
         <ThemeProvider>
           <SiteChrome>
