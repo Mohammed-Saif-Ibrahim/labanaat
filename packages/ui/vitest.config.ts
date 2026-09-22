@@ -27,10 +27,16 @@ export default defineConfig({
         // "options.minThreads and options.maxThreads must not conflict"
         // before a single test runs. Pinning both removes the ambiguity.
         minForks: 1,
-        // Cap concurrency so this doesn't oversubscribe a small/contended
-        // machine; more cores just means more sequential batching, not a
-        // slower per-test run.
-        maxForks: 4,
+        // Capped at 2, not left at some higher default: GitHub-hosted
+        // ubuntu-latest runners (this project's CI) have 2 vCPUs. Forks
+        // are separate OS processes — each with its own Node startup,
+        // module graph, and jsdom instance — so asking for more
+        // concurrent forks than there are cores means they time-slice
+        // against each other instead of actually running in parallel,
+        // which was measurably making the already-slow Radix Popper
+        // positioning tests (Tooltip, DropdownMenu, Popover) slower on
+        // CI, not faster. Bump this only if CI's runner spec changes.
+        maxForks: 2,
       },
     },
     coverage: {

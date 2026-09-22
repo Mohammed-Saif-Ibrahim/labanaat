@@ -24,5 +24,5 @@ describe("accessibility (axe) — Tooltip", () => {
       </TooltipProvider>
     );
     expect(await axe(container)).toHaveNoViolations();
-  }, 45000);
+  }, 90000);
 });

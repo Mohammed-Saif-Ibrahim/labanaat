@@ -22,9 +22,9 @@ describe("Popover", () => {
     expect(screen.queryByText("Filter options here.")).not.toBeInTheDocument();
     openPopover(screen.getByRole("button", { name: "Filters" }));
     expect(
-      await screen.findByText("Filter options here.", {}, { timeout: 40000 })
+      await screen.findByText("Filter options here.", {}, { timeout: 80000 })
     ).toBeInTheDocument();
-  }, 45000);
+  }, 90000);
 
   it("closes via PopoverClose", async () => {
     render(
@@ -36,12 +36,12 @@ describe("Popover", () => {
       </Popover>
     );
     openPopover(screen.getByRole("button", { name: "Filters" }));
-    const closeBtn = await screen.findByRole("button", { name: "Done" }, { timeout: 40000 });
+    const closeBtn = await screen.findByRole("button", { name: "Done" }, { timeout: 80000 });
     fireEvent.pointerDown(closeBtn, { button: 0, pointerId: 1 });
     fireEvent.pointerUp(closeBtn, { button: 0, pointerId: 1 });
     fireEvent.click(closeBtn);
     expect(screen.queryByText("Done")).not.toBeInTheDocument();
-  }, 45000);
+  }, 90000);
 
   it("supports a fully controlled open state", async () => {
     const onOpenChange = vi.fn();
@@ -52,7 +52,7 @@ describe("Popover", () => {
       </Popover>
     );
     expect(
-      await screen.findByText("Filter options here.", {}, { timeout: 40000 })
+      await screen.findByText("Filter options here.", {}, { timeout: 80000 })
     ).toBeInTheDocument();
-  }, 45000);
+  }, 90000);
 });

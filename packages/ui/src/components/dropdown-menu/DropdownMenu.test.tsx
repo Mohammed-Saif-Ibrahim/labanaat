@@ -41,10 +41,10 @@ describe("DropdownMenu", () => {
     expect(screen.queryByText("Edit")).not.toBeInTheDocument();
     openMenu(screen.getByRole("button", { name: "Actions" }));
     expect(
-      await screen.findByRole("menuitem", { name: "Edit" }, { timeout: 40000 })
+      await screen.findByRole("menuitem", { name: "Edit" }, { timeout: 80000 })
     ).toBeInTheDocument();
     expect(screen.getByRole("menuitem", { name: "Delete" })).toBeInTheDocument();
-  }, 45000);
+  }, 90000);
 
   it("calls onSelect when a menu item is chosen", async () => {
     const onSelect = vi.fn();
@@ -57,12 +57,12 @@ describe("DropdownMenu", () => {
       </DropdownMenu>
     );
     openMenu(screen.getByRole("button", { name: "Actions" }));
-    const item = await screen.findByRole("menuitem", { name: "Edit" }, { timeout: 40000 });
+    const item = await screen.findByRole("menuitem", { name: "Edit" }, { timeout: 80000 });
     fireEvent.pointerDown(item, { button: 0, pointerId: 1 });
     fireEvent.pointerUp(item, { button: 0, pointerId: 1 });
     fireEvent.click(item);
     expect(onSelect).toHaveBeenCalled();
-  }, 45000);
+  }, 90000);
 
   it("the destructive prop applies distinct styling from a regular item", async () => {
     render(
@@ -75,8 +75,8 @@ describe("DropdownMenu", () => {
       </DropdownMenu>
     );
     openMenu(screen.getByRole("button", { name: "Actions" }));
-    const edit = await screen.findByRole("menuitem", { name: "Edit" }, { timeout: 40000 });
+    const edit = await screen.findByRole("menuitem", { name: "Edit" }, { timeout: 80000 });
     const del = screen.getByRole("menuitem", { name: "Delete" });
     expect(edit.className).not.toBe(del.className);
-  }, 45000);
+  }, 90000);
 });

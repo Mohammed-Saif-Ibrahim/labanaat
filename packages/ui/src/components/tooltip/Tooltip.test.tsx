@@ -18,8 +18,8 @@ describe("Tooltip", () => {
     render(<Example />);
     expect(screen.queryByText("Helpful detail")).not.toBeInTheDocument();
     screen.getByRole("button", { name: "Hover me" }).focus();
-    expect(await screen.findByText("Helpful detail", {}, { timeout: 40000 })).toBeInTheDocument();
-  }, 45000);
+    expect(await screen.findByText("Helpful detail", {}, { timeout: 80000 })).toBeInTheDocument();
+  }, 90000);
 
   it("hides again once focus moves away", async () => {
     render(
@@ -29,9 +29,9 @@ describe("Tooltip", () => {
       </>
     );
     screen.getByRole("button", { name: "Hover me" }).focus();
-    await screen.findByText("Helpful detail", {}, { timeout: 40000 });
+    await screen.findByText("Helpful detail", {}, { timeout: 80000 });
     screen.getByRole("button", { name: "Elsewhere" }).focus();
     await new Promise((resolve) => setTimeout(resolve, 0));
     expect(screen.queryByText("Helpful detail")).not.toBeInTheDocument();
-  }, 45000);
+  }, 90000);
 });

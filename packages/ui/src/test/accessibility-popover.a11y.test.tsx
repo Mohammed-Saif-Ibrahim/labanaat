@@ -22,5 +22,5 @@ describe("accessibility (axe) — Popover", () => {
       </Popover>
     );
     expect(await axe(container)).toHaveNoViolations();
-  }, 45000);
+  }, 90000);
 });

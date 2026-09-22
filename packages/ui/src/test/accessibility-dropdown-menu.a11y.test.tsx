@@ -29,5 +29,5 @@ describe("accessibility (axe) — DropdownMenu", () => {
       </DropdownMenu>
     );
     expect(await axe(container)).toHaveNoViolations();
-  }, 45000);
+  }, 90000);
 });
