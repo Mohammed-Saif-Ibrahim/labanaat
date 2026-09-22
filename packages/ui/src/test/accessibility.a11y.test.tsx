@@ -12,15 +12,6 @@ import { DatePicker } from "../components/date-picker";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../components/tabs";
 import { Dialog, DialogContent, DialogTitle, DialogDescription } from "../components/dialog";
 import { Drawer, DrawerContent, DrawerTitle } from "../components/drawer";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "../components/dropdown-menu";
-import { Popover, PopoverTrigger, PopoverContent } from "../components/popover";
-import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "../components/tooltip";
-import { ToastProvider, ToastRegistry, ToastViewport, ToastItem } from "../components/toast";
 import { Input } from "../components/input";
 import {
   Accordion,
@@ -74,6 +65,22 @@ import { FileManager } from "../components/file-manager";
  * Toast) are covered by their own behavior tests instead, since jsdom's
  * lack of real layout makes portal-based positioning assertions unreliable
  * here.
+ *
+ * The four Radix Popper-positioned/portaled "rendered open" a11y checks
+ * (DropdownMenu, Popover, Tooltip, Toast) each live in their own file —
+ * accessibility-{dropdown-menu,popover,tooltip,toast}.a11y.test.tsx — not
+ * here. Their Popper positioning is, on some machines, slow enough under
+ * jsdom that even a generous per-test timeout isn't always enough (see
+ * DropdownMenu.test.tsx's openMenu() comment for the full explanation —
+ * documented, environment-specific jsdom slowness, not a real bug), and
+ * which of the four ends up slowest varies by machine and system load.
+ * When they lived together in one file, whichever one timed out left an
+ * aborted-but-still-running axe.run() call behind, and axe-core's global
+ * "already running" lock from that call then failed every a11y test after
+ * it in the same file — one slow component taking down its unrelated
+ * neighbors' results. Vitest resets the module registry between test
+ * files, so splitting them out means a stuck axe-core lock in one file can
+ * never leak into another's run — each one now only ever fails itself.
  */
 describe("accessibility (axe)", () => {
   it("Checkbox with label has no violations", async () => {
@@ -401,51 +408,4 @@ describe("accessibility (axe)", () => {
     );
     expect(await axe(container)).toHaveNoViolations();
   });
-
-  it("DropdownMenu has no violations (rendered open)", async () => {
-    const { container } = render(
-      <DropdownMenu open>
-        <DropdownMenuTrigger>Actions</DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuItem>Edit</DropdownMenuItem>
-          <DropdownMenuItem>Delete</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    );
-    expect(await axe(container)).toHaveNoViolations();
-  }, 45000);
-
-  it("Popover has no violations (rendered open)", async () => {
-    const { container } = render(
-      <Popover open>
-        <PopoverTrigger>Filters</PopoverTrigger>
-        <PopoverContent>Filter options here.</PopoverContent>
-      </Popover>
-    );
-    expect(await axe(container)).toHaveNoViolations();
-  }, 45000);
-
-  it("Tooltip has no violations (rendered open)", async () => {
-    const { container } = render(
-      <TooltipProvider>
-        <Tooltip open>
-          <TooltipTrigger>Hover me</TooltipTrigger>
-          <TooltipContent>Helpful detail</TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
-    );
-    expect(await axe(container)).toHaveNoViolations();
-  }, 45000);
-
-  it("Toast has no violations (rendered open)", async () => {
-    const { container } = render(
-      <ToastProvider>
-        <ToastRegistry>
-          <ToastItem open title="Saved" description="Your changes were saved." />
-        </ToastRegistry>
-        <ToastViewport />
-      </ToastProvider>
-    );
-    expect(await axe(container)).toHaveNoViolations();
-  }, 45000);
 });
