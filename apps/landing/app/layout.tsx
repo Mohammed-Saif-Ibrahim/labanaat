@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { Instrument_Sans } from "next/font/google";
 import { ThemeProvider } from "./theme-provider";
 import { SiteChrome } from "./site-chrome";
-import { Analytics } from "@vercel/analytics/react";
+import { Analytics } from "@vercel/analytics/next";
 
 const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
@@ -67,11 +67,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" className={instrumentSans.variable}>
       <body className="ui-flex ui-min-h-screen ui-flex-col">
         <ThemeProvider>
-          <SiteChrome>
-            {children}
-            <Analytics />
-          </SiteChrome>
+          <SiteChrome>{children}</SiteChrome>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/@labanaat/ui"><img src="https://img.shields.io/badge/npm-%400.9.0--beta-4F46E5" alt="npm version" /></a>
+  <a href="https://www.npmjs.com/package/@labanaat/ui"><img src="https://img.shields.io/badge/npm-%400.9.0-4F46E5" alt="npm version" /></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-4F46E5" alt="MIT License" /></a>
   <img src="https://img.shields.io/badge/components-47-4F46E5" alt="47 components" />
 </p>
@@ -171,7 +171,7 @@ on every change (not just an in-monorepo build). Full history of what's
 shipped, what was fixed along the way, and what's still open lives in
 [`packages/ui/CHANGELOG.md`](./packages/ui/CHANGELOG.md).
 
-**Currently shipping as `0.9.0-beta`** — the library and its testing are
+**Currently shipping as `0.9.0`** — the library and its testing are
 solid, but the newest component batch hasn't had a full real-browser QA
 pass yet. `1.0.0` follows that pass.
 
